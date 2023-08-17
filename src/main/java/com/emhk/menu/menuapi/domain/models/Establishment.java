@@ -2,6 +2,7 @@ package com.emhk.menu.menuapi.domain.models;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,7 +14,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -35,19 +39,28 @@ public class Establishment {
   private Address address;
 
   @CreationTimestamp
-  @Column(columnDefinition = "datetime")
+  @Column(columnDefinition = "timestamp")
   private OffsetDateTime createdAt;
 
   @UpdateTimestamp
-  @Column(columnDefinition = "datetime")
+  @Column(columnDefinition = "timestamp")
   private OffsetDateTime updatedAt;
 
-  private Menu menu;
+  @OneToMany(mappedBy = "establishment")
+  private List<Menu> menus = new ArrayList<>();
+
+  @OneToMany(mappedBy = "establishment")
+  private List<Product> products;
   
   @Column(nullable = false)
   private BigDecimal freightRate;
 
-  
-  private List<FormOfPayment> formsOfPayment;
+  @ManyToMany
+  @JoinTable(
+    name = "establishment_forms_of_payment",
+    joinColumns = @JoinColumn(name = "establishment_id"),
+    inverseJoinColumns = @JoinColumn(name = "form_of_payment_id")
+  )
+  private List<FormOfPayment> formsOfPayment = new ArrayList<>();
 
 }
