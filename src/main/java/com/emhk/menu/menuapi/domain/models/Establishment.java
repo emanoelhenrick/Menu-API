@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -62,5 +63,8 @@ public class Establishment {
     inverseJoinColumns = @JoinColumn(name = "form_of_payment_id")
   )
   private List<FormOfPayment> formsOfPayment = new ArrayList<>();
+
+  @ManyToOne
+  private User owner;
 
 }
