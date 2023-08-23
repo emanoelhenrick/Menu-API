@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
@@ -26,7 +27,7 @@ public class Menu {
   @Column(nullable = false)
   private String name;
 
-  @OneToMany(mappedBy = "menu")
+  @ManyToMany
   private List<Product> products = new ArrayList<>();
 
   @ManyToOne

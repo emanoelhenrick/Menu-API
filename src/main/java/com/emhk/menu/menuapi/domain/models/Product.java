@@ -1,11 +1,15 @@
 package com.emhk.menu.menuapi.domain.models;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,8 +33,13 @@ public class Product {
   private String imageUrl;
   private String ingredients;
 
-  @ManyToOne
-  private Menu menu;
+  @ManyToMany
+  @JoinTable(
+    name = "product_menu",
+    joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "menu_id")
+  )
+  private List<Menu> menu;
 
   @ManyToOne
   private Establishment establishment;
