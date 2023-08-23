@@ -1,4 +1,4 @@
-package com.emhk.menu.menuapi.domain.services;
+package com.emhk.menu.menuapi.domain.services.establishment;
 
 import com.emhk.menu.menuapi.domain.models.Establishment;
 
