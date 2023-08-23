@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.emhk.menu.menuapi.domain.models.Establishment;
 
 public interface EstablishmentRepository extends JpaRepository<Establishment, Long> {
-  public List<Establishment> findByOwner(Long id);
+  List<Establishment> findByOwnerId(Long id);
 }

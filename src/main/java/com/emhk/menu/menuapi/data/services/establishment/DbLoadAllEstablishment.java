@@ -15,7 +15,7 @@ public class DbLoadAllEstablishment implements LoadAllEstablishment {
 
   @Override
   public List<Establishment> loadAllByOwner(Long id) {
-    return repository.findByOwner(id);
+    return repository.findByOwnerId(id);
   }
   
 }
