@@ -1,4 +1,4 @@
-package com.emhk.menu.menuapi.infra.repository;
+package com.emhk.menu.menuapi.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
