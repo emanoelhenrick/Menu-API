@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import com.emhk.menu.menuapi.domain.models.FormOfPayment;
 import com.emhk.menu.menuapi.presentation.dtos.address.AddressOutput;
+import com.emhk.menu.menuapi.presentation.dtos.user.output.UserIdOutput;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 public class EstablishmentOutput {
 
   private String id;
+  private UserIdOutput owner;
   private String name;
   private AddressOutput address;
   private OffsetDateTime createdAt;
