@@ -1,6 +1,7 @@
 package com.emhk.menu.menuapi.data.services.order;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class DbAddProductsToOrder implements AddProductsToOrder {
   private OrderRepository repository;
 
   @Override
-  public Order add(String orderUUId, List<Product> products) {
-    var order = repository.findByExternalId(orderUUId);
+  public Order add(String orderUUID, List<Product> products) {
+    var order = repository.findByExternalId(UUID.fromString(orderUUID));
     products.forEach(product -> order.getProducts().add(product));
     return repository.save(order);
   }

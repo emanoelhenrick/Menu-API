@@ -1,5 +1,7 @@
 package com.emhk.menu.menuapi.data.services.order;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ public class DbUpdateOrderStatus implements UpdateOrderStatus {
 
   @Override
   public void update(String orderUUID, OrderStatus status) {
-    var order = repository.findByExternalId(orderUUID);
+    var order = repository.findByExternalId(UUID.fromString(orderUUID));
     order.setStatus(status);
     repository.save(order);
   }
