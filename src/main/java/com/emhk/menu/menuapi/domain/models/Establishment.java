@@ -56,6 +56,9 @@ public class Establishment {
   @Column(nullable = false)
   private BigDecimal freightRate;
 
+  @OneToMany(mappedBy = "establishment")
+  private List<Order> orders;
+
   @ManyToMany
   @JoinTable(
     name = "establishment_forms_of_payment",

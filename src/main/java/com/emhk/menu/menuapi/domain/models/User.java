@@ -41,4 +41,7 @@ public class User {
   @OneToMany(mappedBy = "owner")
   private List<Establishment> establishments;
 
+  @OneToMany(mappedBy = "user")
+  private List<Order> orders;
+
 }
