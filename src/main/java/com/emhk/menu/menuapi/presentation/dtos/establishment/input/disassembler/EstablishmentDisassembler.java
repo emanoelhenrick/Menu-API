@@ -1,4 +1,4 @@
-package com.emhk.menu.menuapi.presentation.dtos.establishment.input.dissasembler;
+package com.emhk.menu.menuapi.presentation.dtos.establishment.input.disassembler;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

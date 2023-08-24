@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.emhk.menu.menuapi.domain.services.establishment.AddEstablishment;
 import com.emhk.menu.menuapi.presentation.dtos.establishment.input.EstablishmentInput;
-import com.emhk.menu.menuapi.presentation.dtos.establishment.input.dissasembler.EstablishmentDisassembler;
+import com.emhk.menu.menuapi.presentation.dtos.establishment.input.disassembler.EstablishmentDisassembler;
 import com.emhk.menu.menuapi.presentation.dtos.establishment.output.EstablishmentOutput;
 import com.emhk.menu.menuapi.presentation.dtos.establishment.output.assembler.EstablishmentAssembler;
 
