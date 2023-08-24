@@ -16,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -41,6 +42,8 @@ public class Order {
   private Establishment establishment;
 
   private BigDecimal totalPrice;
+
+  @OneToMany
   private List<Product> products;
 
   @Enumerated(EnumType.STRING)
