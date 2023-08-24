@@ -1,5 +1,7 @@
 package com.emhk.menu.menuapi.data.services.establishment;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ public class DbLoadEstablishment implements LoadEstablishment{
 
   @Override
   public Establishment load(String id) {
-    return repository.findById(id).orElseThrow();
+    return repository.findById(UUID.fromString(id)).orElseThrow();
   }
   
 }

@@ -1,6 +1,7 @@
 package com.emhk.menu.menuapi.data.services.establishment;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,7 +16,8 @@ public class DbLoadAllEstablishment implements LoadAllEstablishment {
 
   @Override
   public List<Establishment> loadAllByOwner(String id) {
-    return repository.findByOwnerId(id);
+    
+    return repository.findAllByOwnerId(UUID.fromString(id)).orElseThrow();
   }
   
 }
