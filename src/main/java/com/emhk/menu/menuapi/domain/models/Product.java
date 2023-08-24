@@ -2,7 +2,9 @@ package com.emhk.menu.menuapi.domain.models;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +25,11 @@ public class Product {
   @EqualsAndHashCode.Include
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @Column(unique = true)
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID externalId;
+  
   private String name;
   private String description;
   private BigDecimal price;

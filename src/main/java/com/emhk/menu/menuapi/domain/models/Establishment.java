@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -31,6 +32,10 @@ public class Establishment {
   @EqualsAndHashCode.Include
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @Column(unique = true)
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID externalId;
 
   @Column(nullable = false)
   private String name;

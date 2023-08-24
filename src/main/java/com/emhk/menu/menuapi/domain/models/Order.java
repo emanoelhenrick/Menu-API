@@ -17,7 +17,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,6 +32,8 @@ public class Order {
   @EqualsAndHashCode.Include  
   private Long id;
 
+  @Column(unique = true)
+  @GeneratedValue(strategy = GenerationType.UUID)
   private UUID externalId;
 
   @ManyToOne
@@ -62,11 +63,6 @@ public class Order {
     products.forEach(product -> total.add(product.getPrice()));
     total.subtract(establishment.getFreightRate());
     this.totalPrice = total;
-  }
-
-  @PrePersist
-  private void generateUUID() {
-    this.externalId = UUID.randomUUID();
   }
 
 }

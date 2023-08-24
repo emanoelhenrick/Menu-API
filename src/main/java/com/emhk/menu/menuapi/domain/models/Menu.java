@@ -2,6 +2,7 @@ package com.emhk.menu.menuapi.domain.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,6 +24,10 @@ public class Menu {
   @EqualsAndHashCode.Include
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
+  @Column(unique = true)
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID externalId;
 
   @Column(nullable = false)
   private String name;
