@@ -33,4 +33,6 @@ public class Menu {
   @ManyToOne
   private Establishment establishment;
 
+  private Boolean active;
+
 }
