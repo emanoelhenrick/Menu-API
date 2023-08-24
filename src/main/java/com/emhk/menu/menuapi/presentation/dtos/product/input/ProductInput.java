@@ -2,8 +2,6 @@ package com.emhk.menu.menuapi.presentation.dtos.product.input;
 
 import java.math.BigDecimal;
 
-import com.emhk.menu.menuapi.presentation.dtos.productCategory.input.ProductCategoryInput;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -22,7 +20,6 @@ public class ProductInput {
   @PositiveOrZero
   private BigDecimal price;
 
-  private ProductCategoryInput category;
   private String imageUrl;
 
   @NotBlank
