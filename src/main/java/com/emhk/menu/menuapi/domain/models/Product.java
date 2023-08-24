@@ -27,9 +27,6 @@ public class Product {
   private String description;
   private BigDecimal price;
 
-  @ManyToOne
-  private ProductCategory category;
-
   private String imageUrl;
   private String ingredients;
 
