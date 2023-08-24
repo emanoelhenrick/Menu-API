@@ -5,5 +5,5 @@ import java.util.List;
 import com.emhk.menu.menuapi.domain.models.Establishment;
 
 public interface LoadAllEstablishment {
-  public List<Establishment> loadAllByOwner(Long id);
+  public List<Establishment> loadAllByOwner(String id);
 }

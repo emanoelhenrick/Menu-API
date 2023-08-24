@@ -14,7 +14,7 @@ public class DbLoadEstablishment implements LoadEstablishment{
   private EstablishmentRepository repository;
 
   @Override
-  public Establishment load(Long id) {
+  public Establishment load(String id) {
     return repository.findById(id).orElseThrow();
   }
   

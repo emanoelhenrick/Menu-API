@@ -26,6 +26,6 @@ public class ProductInput {
   private String ingredients;
 
   @NotNull
-  private Long establishmentId;
+  private String establishmentId;
 
 }

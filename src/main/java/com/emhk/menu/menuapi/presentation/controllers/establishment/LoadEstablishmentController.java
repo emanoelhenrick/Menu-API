@@ -21,7 +21,7 @@ public class LoadEstablishmentController {
   private EstablishmentAssembler assembler;
 
   @GetMapping("/{id}")
-  public EstablishmentOutput loadEstablishmentById(@PathVariable Long id) {
+  public EstablishmentOutput loadEstablishmentById(@PathVariable String id) {
     return assembler.toDTO(loadEstablishment.load(id));
   }
 }

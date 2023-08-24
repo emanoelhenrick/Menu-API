@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class MenuShortOutput {
 
-  private Long id;
+  private String id;
   private String name;
   private EstablishmentShortOutput establishment;
 

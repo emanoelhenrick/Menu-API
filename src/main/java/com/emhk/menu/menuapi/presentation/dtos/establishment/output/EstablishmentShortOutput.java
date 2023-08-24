@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class EstablishmentShortOutput {
 
-  private Long id;
+  private String id;
   private String name;
   
 }

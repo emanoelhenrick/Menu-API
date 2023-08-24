@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.emhk.menu.menuapi.domain.models.Order;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, String> {
   Order findByExternalId(UUID orderUUID);
 }

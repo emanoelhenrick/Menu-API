@@ -23,13 +23,9 @@ public class Product {
   
   @Id
   @EqualsAndHashCode.Include
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
-  @Column(unique = true)
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID externalId;
-  
+  private UUID id;
+
   private String name;
   private String description;
   private BigDecimal price;

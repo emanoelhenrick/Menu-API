@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.UuidGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -30,12 +31,8 @@ public class Establishment {
   
   @Id
   @EqualsAndHashCode.Include
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-
-  @Column(unique = true)
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID externalId;
+  private UUID Id;
 
   @Column(nullable = false)
   private String name;

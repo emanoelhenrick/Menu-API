@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.UuidGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,13 +29,9 @@ import lombok.EqualsAndHashCode;
 public class Order {
   
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @EqualsAndHashCode.Include  
-  private Long id;
-
-  @Column(unique = true)
+  @EqualsAndHashCode.Include
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID externalId;
+  private UUID id;
 
   @ManyToOne
   private User user;

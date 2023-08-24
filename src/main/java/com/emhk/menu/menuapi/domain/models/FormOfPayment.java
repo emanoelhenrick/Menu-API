@@ -17,11 +17,8 @@ public class FormOfPayment {
   
   @Id
   @EqualsAndHashCode.Include
-  private Long id;
-
-  @Column(unique = true)
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID externalId;
+  private UUID id;
 
   private String name;
   private String description;
