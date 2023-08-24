@@ -17,8 +17,8 @@ public class DbAddProductsToOrder implements AddProductsToOrder {
   private OrderRepository repository;
 
   @Override
-  public Order add(Long OrderId, List<Product> products) {
-    var order = repository.findById(OrderId).orElseThrow();
+  public Order add(String orderUUId, List<Product> products) {
+    var order = repository.findByExternalId(orderUUId);
     products.forEach(product -> order.getProducts().add(product));
     return repository.save(order);
   }

@@ -14,8 +14,8 @@ public class DbUpdateOrderStatus implements UpdateOrderStatus {
   private OrderRepository repository;
 
   @Override
-  public void update(Long id, OrderStatus status) {
-    var order = repository.findById(id).orElseThrow();
+  public void update(String orderUUID, OrderStatus status) {
+    var order = repository.findByExternalId(orderUUID);
     order.setStatus(status);
     repository.save(order);
   }

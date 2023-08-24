@@ -6,5 +6,5 @@ import com.emhk.menu.menuapi.domain.models.Order;
 import com.emhk.menu.menuapi.domain.models.Product;
 
 public interface AddProductsToOrder {
-  public Order add(Long OrderId, List<Product> products);
+  public Order add(String orderId, List<Product> products);
 }
