@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.emhk.menu.menuapi.domain.models.Order;
 
-public interface OrderRepository extends JpaRepository<Order, String> {
-  Optional<Order> findById(UUID id);
+public interface OrderRepository extends JpaRepository<Order, UUID> {
+
 }

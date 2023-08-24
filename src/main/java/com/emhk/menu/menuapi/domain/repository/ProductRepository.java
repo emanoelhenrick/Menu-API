@@ -8,6 +8,6 @@ import com.emhk.menu.menuapi.domain.models.Product;
 import java.util.UUID;
 
 
-public interface ProductRepository extends JpaRepository<Product, String> {
-  Optional<Product> findById(UUID id);
+public interface ProductRepository extends JpaRepository<Product, UUID> {
+
 }

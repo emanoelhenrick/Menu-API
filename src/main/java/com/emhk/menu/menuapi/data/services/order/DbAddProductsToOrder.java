@@ -19,7 +19,7 @@ public class DbAddProductsToOrder implements AddProductsToOrder {
 
   @Override
   public Order add(String orderUUID, List<Product> products) {
-    var order = repository.findById(orderUUID).orElseThrow();
+    var order = repository.findById(UUID.fromString(orderUUID)).orElseThrow();
     products.forEach(product -> order.getProducts().add(product));
     return repository.save(order);
   }
