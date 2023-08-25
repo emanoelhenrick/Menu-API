@@ -1,6 +1,5 @@
 package com.emhk.menu.menuapi.data.services.order;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emhk.menu.menuapi.domain.models.Order;
@@ -10,8 +9,11 @@ import com.emhk.menu.menuapi.domain.services.order.CreateOrder;
 @Service
 public class DbCreateOrder implements CreateOrder {
 
-  @Autowired
-  private OrderRepository orderRepository;
+  private final OrderRepository orderRepository;
+
+  DbCreateOrder(OrderRepository orderRepository) {
+    this.orderRepository = orderRepository;
+  }
 
   @Override
   public Order create(Order order) {

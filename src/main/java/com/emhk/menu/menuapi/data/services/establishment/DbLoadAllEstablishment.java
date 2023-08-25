@@ -14,11 +14,16 @@ import com.emhk.menu.menuapi.domain.services.establishment.LoadAllEstablishment;
 @Service
 public class DbLoadAllEstablishment implements LoadAllEstablishment {
 
-  @Autowired
-  private EstablishmentRepository establishmentRepository;
+  private final EstablishmentRepository establishmentRepository;
+  private final EstablishmentAssembler assembler;
 
-  @Autowired
-  private EstablishmentAssembler assembler;
+  DbLoadAllEstablishment(
+    EstablishmentRepository establishmentRepository,
+    EstablishmentAssembler assembler
+  ) {
+    this.establishmentRepository = establishmentRepository;
+    this.assembler = assembler;
+  }
 
   @Override
   public List<EstablishmentShortOutput> loadAllByOwner(String id) {

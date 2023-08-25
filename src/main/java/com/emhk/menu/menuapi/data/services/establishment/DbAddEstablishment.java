@@ -2,7 +2,6 @@ package com.emhk.menu.menuapi.data.services.establishment;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emhk.menu.menuapi.domain.models.UserRole;

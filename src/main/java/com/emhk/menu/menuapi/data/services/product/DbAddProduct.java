@@ -14,14 +14,19 @@ import com.emhk.menu.menuapi.domain.services.product.AddProduct;
 @Service
 public class DbAddProduct implements AddProduct {
 
-  @Autowired
-  private ProductRepository productRepository;
+  private final ProductRepository productRepository;
+  private final ProductDisassembler disassembler;
+  private final ProductAssembler assembler;
 
-  @Autowired
-  private ProductDisassembler disassembler;
-
-  @Autowired
-  private ProductAssembler assembler;
+  DbAddProduct(
+    ProductRepository productRepository,
+    ProductDisassembler disassembler,
+    ProductAssembler assembler
+  ) {
+    this.productRepository = productRepository;
+    this.disassembler = disassembler;
+    this.assembler = assembler;
+  }
 
   @Override
   public ProductOutput add(ProductInput input) {
