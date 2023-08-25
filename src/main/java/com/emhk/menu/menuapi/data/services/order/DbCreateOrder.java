@@ -11,11 +11,11 @@ import com.emhk.menu.menuapi.domain.services.order.CreateOrder;
 public class DbCreateOrder implements CreateOrder {
 
   @Autowired
-  private OrderRepository repository;
+  private OrderRepository orderRepository;
 
   @Override
   public Order create(Order order) {
-    return repository.save(order);
+    return orderRepository.save(order);
   }
   
 }

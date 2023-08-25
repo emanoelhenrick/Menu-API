@@ -13,13 +13,13 @@ import com.emhk.menu.menuapi.domain.services.order.UpdateOrderStatus;
 public class DbUpdateOrderStatus implements UpdateOrderStatus {
 
   @Autowired
-  private OrderRepository repository;
+  private OrderRepository orderRepository;
 
   @Override
   public void update(String orderUUID, OrderStatus status) {
-    var order = repository.findById(UUID.fromString(orderUUID)).orElseThrow();
+    var order = orderRepository.findById(UUID.fromString(orderUUID)).orElseThrow();
     order.setStatus(status);
-    repository.save(order);
+    orderRepository.save(order);
   }
   
 }

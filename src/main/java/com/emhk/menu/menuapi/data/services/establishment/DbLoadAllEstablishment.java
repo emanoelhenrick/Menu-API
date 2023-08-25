@@ -15,14 +15,14 @@ import com.emhk.menu.menuapi.domain.services.establishment.LoadAllEstablishment;
 public class DbLoadAllEstablishment implements LoadAllEstablishment {
 
   @Autowired
-  private EstablishmentRepository repository;
+  private EstablishmentRepository establishmentRepository;
 
   @Autowired
   private EstablishmentAssembler assembler;
 
   @Override
   public List<EstablishmentShortOutput> loadAllByOwner(String id) {
-    var establishments = repository.findAllByOwnerId(UUID.fromString(id)).orElseThrow();
+    var establishments = establishmentRepository.findAllByOwnerId(UUID.fromString(id)).orElseThrow();
     return assembler.toShortDTOCollection(establishments);
   }
   

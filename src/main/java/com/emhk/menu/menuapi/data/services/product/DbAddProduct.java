@@ -15,7 +15,7 @@ import com.emhk.menu.menuapi.domain.services.product.AddProduct;
 public class DbAddProduct implements AddProduct {
 
   @Autowired
-  private ProductRepository repository;
+  private ProductRepository productRepository;
 
   @Autowired
   private ProductDisassembler disassembler;
@@ -26,7 +26,7 @@ public class DbAddProduct implements AddProduct {
   @Override
   public ProductOutput add(ProductInput input) {
     var product = disassembler.toDomainModel(input);
-    return assembler.toDTO(repository.save(product));
+    return assembler.toDTO(productRepository.save(product));
   }
   
 }

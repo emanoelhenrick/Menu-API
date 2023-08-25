@@ -15,14 +15,14 @@ import com.emhk.menu.menuapi.domain.services.establishment.LoadEstablishment;
 public class DbLoadEstablishment implements LoadEstablishment{
 
   @Autowired
-  private EstablishmentRepository repository;
+  private EstablishmentRepository establishmentRepository;
 
   @Autowired
   private EstablishmentAssembler assembler;
 
   @Override
   public EstablishmentOutput load(String id) {
-    return assembler.toDTO(repository.findById(UUID.fromString(id)).orElseThrow());
+    return assembler.toDTO(establishmentRepository.findById(UUID.fromString(id)).orElseThrow());
   }
   
 }

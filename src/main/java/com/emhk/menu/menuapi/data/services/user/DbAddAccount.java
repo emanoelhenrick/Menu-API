@@ -14,7 +14,7 @@ import com.emhk.menu.menuapi.domain.services.user.AddAccount;
 public class DbAddAccount implements AddAccount {
 
   @Autowired
-  private UserRepository repository;
+  private UserRepository userRepository;
 
   @Autowired
   private UserDisassembler disassembler;
@@ -25,7 +25,7 @@ public class DbAddAccount implements AddAccount {
   @Override
   public UserOutput add(UserInput input) {
     var user = disassembler.toDomainModel(input);
-    return assembler.toDTO(repository.save(user));
+    return assembler.toDTO(userRepository.save(user));
   }
   
 }

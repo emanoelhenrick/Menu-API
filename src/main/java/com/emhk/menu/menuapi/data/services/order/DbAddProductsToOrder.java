@@ -15,13 +15,13 @@ import com.emhk.menu.menuapi.domain.services.order.AddProductsToOrder;
 public class DbAddProductsToOrder implements AddProductsToOrder {
 
   @Autowired
-  private OrderRepository repository;
+  private OrderRepository orderRepository;
 
   @Override
   public Order add(String orderUUID, List<Product> products) {
-    var order = repository.findById(UUID.fromString(orderUUID)).orElseThrow();
+    var order = orderRepository.findById(UUID.fromString(orderUUID)).orElseThrow();
     products.forEach(product -> order.getProducts().add(product));
-    return repository.save(order);
+    return orderRepository.save(order);
   }
   
 }
