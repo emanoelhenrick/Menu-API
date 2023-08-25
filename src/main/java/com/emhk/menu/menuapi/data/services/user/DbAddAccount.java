@@ -3,8 +3,11 @@ package com.emhk.menu.menuapi.data.services.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.emhk.menu.menuapi.domain.models.User;
 import com.emhk.menu.menuapi.domain.repository.UserRepository;
+import com.emhk.menu.menuapi.domain.services.dtos.user.input.UserInput;
+import com.emhk.menu.menuapi.domain.services.dtos.user.input.disassembler.UserDisassembler;
+import com.emhk.menu.menuapi.domain.services.dtos.user.output.UserOutput;
+import com.emhk.menu.menuapi.domain.services.dtos.user.output.assembler.UserAssembler;
 import com.emhk.menu.menuapi.domain.services.user.AddAccount;
 
 @Service
@@ -13,9 +16,16 @@ public class DbAddAccount implements AddAccount {
   @Autowired
   private UserRepository repository;
 
+  @Autowired
+  private UserDisassembler disassembler;
+
+  @Autowired
+  private UserAssembler assembler;
+
   @Override
-  public User add(User user) {
-    return repository.save(user);
+  public UserOutput add(UserInput input) {
+    var user = disassembler.toDomainModel(input);
+    return assembler.toDTO(repository.save(user));
   }
   
 }

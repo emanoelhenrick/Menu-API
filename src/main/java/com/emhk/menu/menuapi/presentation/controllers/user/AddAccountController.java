@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.emhk.menu.menuapi.data.services.user.DbAddAccount;
-import com.emhk.menu.menuapi.presentation.dtos.user.input.UserInput;
-import com.emhk.menu.menuapi.presentation.dtos.user.input.disassembler.UserDisassembler;
-import com.emhk.menu.menuapi.presentation.dtos.user.output.UserOutput;
-import com.emhk.menu.menuapi.presentation.dtos.user.output.assembler.UserAssembler;
+import com.emhk.menu.menuapi.domain.services.dtos.user.input.UserInput;
+import com.emhk.menu.menuapi.domain.services.dtos.user.output.UserOutput;
 
 import jakarta.validation.Valid;
 
@@ -21,16 +19,9 @@ public class AddAccountController {
   @Autowired
   private DbAddAccount addAccount;
 
-  @Autowired
-  private UserDisassembler disassembler;
-
-  @Autowired
-  private UserAssembler assembler;
-
   @PostMapping
-  public UserOutput addAccount(@RequestBody @Valid UserInput input) {
-    var account = disassembler.toDomainModel(input);
-    return assembler.toDTO(addAccount.add(account));
+  public UserOutput addNewAccount(@RequestBody @Valid UserInput input) {
+    return addAccount.add(input);
   }
   
 }
