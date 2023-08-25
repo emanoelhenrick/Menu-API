@@ -17,25 +17,28 @@ import com.emhk.menu.menuapi.domain.services.establishment.AddEstablishment;
 @Service
 public class DbAddEstablishment implements AddEstablishment {
 
-  @Autowired
-  private EstablishmentRepository establishmentRepository;
+  private final EstablishmentRepository establishmentRepository;
+  private final UserRepository userRepository;
+  private final EstablishmentAssembler assembler;
+  private final EstablishmentDisassembler disassembler;
 
-  @Autowired
-  private UserRepository userRepository;
-
-  @Autowired
-  private EstablishmentAssembler assembler;
-
-  @Autowired
-  private EstablishmentDisassembler disassembler;
+  DbAddEstablishment (
+    EstablishmentRepository establishmentRepository,
+    UserRepository userRepository,
+    EstablishmentAssembler assembler,
+    EstablishmentDisassembler disassembler
+  ) {
+    this.assembler = assembler;
+    this.disassembler = disassembler;
+    this.establishmentRepository = establishmentRepository;
+    this.userRepository = userRepository;
+  }
 
   @Override
   public EstablishmentOutput add(EstablishmentInput input) {
     var ownerId = UUID.fromString(input.getOwner().getId());
     var owner = userRepository.findById(ownerId).orElseThrow();
-    
     if (owner.getRole() != UserRole.OWNER) throw new RuntimeException();
-
     var establishment = disassembler.toDomainModel(input);
     return assembler.toDTO(establishmentRepository.save(establishment));
   }
