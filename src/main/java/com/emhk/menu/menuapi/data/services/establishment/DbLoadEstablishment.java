@@ -2,6 +2,7 @@ package com.emhk.menu.menuapi.data.services.establishment;
 
 import java.util.UUID;
 
+import com.emhk.menu.menuapi.domain.exceptions.establishment.EstablishmentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,10 @@ public class DbLoadEstablishment implements LoadEstablishment{
 
   @Override
   public EstablishmentOutput load(String id) {
-    return assembler.toDTO(establishmentRepository.findById(UUID.fromString(id)).orElseThrow());
+    var establishment = establishmentRepository
+        .findById(UUID.fromString(id))
+        .orElseThrow(() -> new EstablishmentNotFoundException(id));
+    return assembler.toDTO(establishment);
   }
   
 }
