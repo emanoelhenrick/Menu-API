@@ -3,6 +3,7 @@ package com.emhk.menu.menuapi.data.services.establishment;
 import java.util.UUID;
 
 import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
+import com.emhk.menu.menuapi.domain.exceptions.establishment.AccessDeniedException;
 import com.emhk.menu.menuapi.domain.exceptions.user.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +42,7 @@ public class DbAddEstablishment implements AddEstablishment {
     var owner = userRepository.findById(ownerId)
       .orElseThrow(() -> new UserNotFoundException(input.getOwner().getId()));
     if (owner.getRole() != UserRole.OWNER) {
-      throw new BusinessException("forbidden");
+      throw new AccessDeniedException();
     }
     var establishment = disassembler.toDomainModel(input);
     var saved = establishmentRepository.save(establishment);

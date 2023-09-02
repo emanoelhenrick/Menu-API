@@ -1,6 +1,7 @@
 package com.emhk.menu.menuapi.data.services.establishment;
 
 import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
+import com.emhk.menu.menuapi.domain.exceptions.establishment.AccessDeniedException;
 import com.emhk.menu.menuapi.domain.exceptions.user.UserNotFoundException;
 import com.emhk.menu.menuapi.domain.models.Establishment;
 import com.emhk.menu.menuapi.domain.models.User;
@@ -123,7 +124,7 @@ public class DbAddEstablishmentTest {
 		fakeEstablishmentInput.setOwner(userId);
 
 		assertThrows(
-			BusinessException.class,
+			AccessDeniedException.class,
 			() -> addEstablishment.add(fakeEstablishmentInput)
 		);
 	}
