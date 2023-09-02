@@ -2,6 +2,8 @@ package com.emhk.menu.menuapi.data.services.establishment;
 
 import java.util.UUID;
 
+import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
+import com.emhk.menu.menuapi.domain.exceptions.user.UserNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.emhk.menu.menuapi.domain.models.UserRole;
@@ -36,10 +38,14 @@ public class DbAddEstablishment implements AddEstablishment {
   @Override
   public EstablishmentOutput add(EstablishmentInput input) {
     var ownerId = UUID.fromString(input.getOwner().getId());
-    var owner = userRepository.findById(ownerId).orElseThrow();
-    if (owner.getRole() != UserRole.OWNER) throw new RuntimeException();
+    var owner = userRepository.findById(ownerId)
+      .orElseThrow(() -> new UserNotFoundException(input.getOwner().getId()));
+    if (owner.getRole() != UserRole.OWNER) {
+      throw new BusinessException("forbidden");
+    }
     var establishment = disassembler.toDomainModel(input);
-    return assembler.toDTO(establishmentRepository.save(establishment));
+    var saved = establishmentRepository.save(establishment);
+    return assembler.toDTO(saved);
   }
   
 }
