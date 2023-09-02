@@ -3,7 +3,6 @@ package com.emhk.menu.menuapi.domain.services.dtos.establishment.output.assemble
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.emhk.menu.menuapi.domain.models.Establishment;
@@ -15,7 +14,7 @@ public class EstablishmentAssembler {
 
   private final ModelMapper mapper;
 
-  EstablishmentAssembler(ModelMapper modelMapper) {
+  public EstablishmentAssembler(ModelMapper modelMapper) {
     this.mapper = modelMapper;
   }
   
