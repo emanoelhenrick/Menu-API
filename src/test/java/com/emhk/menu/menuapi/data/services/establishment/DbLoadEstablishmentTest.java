@@ -58,4 +58,23 @@ public class DbLoadEstablishmentTest {
     );
   }
 
+  @Test
+  void ShouldReturnsAEstablishmentIfSuccess() {
+    Mockito
+      .when(establishmentRepository.findById(UUID.fromString("f23901a1-3be4-4d1b-aaaf-b286e453e584")))
+      .thenReturn(Optional.of(fakeEstablishment));
+
+    Mockito
+      .when(assembler.toDTO(fakeEstablishment))
+      .thenReturn(modelMapper.map(fakeEstablishment, EstablishmentOutput.class));
+
+    var establishment = loadEstablishment.load("f23901a1-3be4-4d1b-aaaf-b286e453e584");
+
+    Assertions
+      .assertEquals(
+        establishment.getId(),
+        fakeEstablishment.getId().toString()
+      );
+
+  }
 }
