@@ -9,9 +9,12 @@ import com.emhk.menu.menuapi.domain.services.dtos.user.input.UserInput;
 
 @Component
 public class UserDisassembler {
-  
-  @Autowired
-  private ModelMapper mapper;
+
+  private final ModelMapper mapper;
+
+  UserDisassembler(ModelMapper modelMapper) {
+    this.mapper = modelMapper;
+  }
   
   public User toDomainModel(UserInput input) {
     return mapper.map(input, User.class);

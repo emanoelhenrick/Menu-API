@@ -10,11 +10,13 @@ import com.emhk.menu.menuapi.domain.models.User;
 import com.emhk.menu.menuapi.domain.services.dtos.user.output.UserOutput;
 
 @Component
-
 public class UserAssembler {
 
-  @Autowired
-  private ModelMapper mapper;
+  private final ModelMapper mapper;
+
+  UserAssembler(ModelMapper modelMapper) {
+    this.mapper = modelMapper;
+  }
   
   public UserOutput toDTO(User User) {
     return mapper.map(User, UserOutput.class);

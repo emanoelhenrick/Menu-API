@@ -13,8 +13,11 @@ import com.emhk.menu.menuapi.domain.services.dtos.establishment.output.Establish
 @Component
 public class EstablishmentAssembler {
 
-  @Autowired
-  private ModelMapper mapper;
+  private final ModelMapper mapper;
+
+  EstablishmentAssembler(ModelMapper modelMapper) {
+    this.mapper = modelMapper;
+  }
   
   public EstablishmentOutput toDTO(Establishment establishment) {
     return mapper.map(establishment, EstablishmentOutput.class);

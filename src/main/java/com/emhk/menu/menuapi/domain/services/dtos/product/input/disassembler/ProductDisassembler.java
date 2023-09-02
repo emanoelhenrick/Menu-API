@@ -9,9 +9,12 @@ import com.emhk.menu.menuapi.domain.services.dtos.product.input.ProductInput;
 
 @Component
 public class ProductDisassembler {
-  
-  @Autowired
-  private ModelMapper mapper;
+
+  private final ModelMapper mapper;
+
+  ProductDisassembler(ModelMapper modelMapper) {
+    this.mapper = modelMapper;
+  }
 
   public Product toDomainModel(ProductInput input) {
     return mapper.map(input, Product.class);

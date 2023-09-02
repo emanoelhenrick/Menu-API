@@ -11,9 +11,12 @@ import com.emhk.menu.menuapi.domain.services.dtos.product.output.ProductOutput;
 
 @Component
 public class ProductAssembler {
-  
-  @Autowired
-  private ModelMapper mapper;
+
+  private final ModelMapper mapper;
+
+  ProductAssembler(ModelMapper modelMapper) {
+    this.mapper = modelMapper;
+  }
 
   public ProductOutput toDTO(Product product) {
     return mapper.map(product, ProductOutput.class);

@@ -9,9 +9,12 @@ import com.emhk.menu.menuapi.domain.services.dtos.establishment.input.Establishm
 
 @Component
 public class EstablishmentDisassembler {
-  
-  @Autowired
-  private ModelMapper mapper;
+
+  private final ModelMapper mapper;
+
+  EstablishmentDisassembler(ModelMapper modelMapper) {
+    this.mapper = modelMapper;
+  }
   
   public Establishment toDomainModel(EstablishmentInput input) {
     return mapper.map(input, Establishment.class);
