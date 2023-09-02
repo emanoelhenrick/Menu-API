@@ -1,5 +1,6 @@
 package com.emhk.menu.menuapi.data.services.establishment;
 
+import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
 import com.emhk.menu.menuapi.domain.exceptions.user.UserNotFoundException;
 import com.emhk.menu.menuapi.domain.models.Establishment;
 import com.emhk.menu.menuapi.domain.models.User;
@@ -51,7 +52,7 @@ public class DbAddEstablishmentTest {
 	}
 
 	private User fakeOwner;
-//	private User fakeUser;
+	private User fakeUser;
 	private EstablishmentInput fakeEstablishmentInput;
 	private Establishment fakeEstablishmentSaved;
 	private Establishment fakeEstablishment;
@@ -64,10 +65,10 @@ public class DbAddEstablishmentTest {
 		fakeOwner.setId(ownerId);
 		fakeOwner.setRole(UserRole.OWNER);
 
-//		var userId = UUID.randomUUID();
-//		fakeUser = new User();
-//		fakeUser.setId(userId);
-//		fakeUser.setRole(UserRole.CUSTOMER);
+		var userId = UUID.randomUUID();
+		fakeUser = new User();
+		fakeUser.setId(userId);
+		fakeUser.setRole(UserRole.CUSTOMER);
 
 		var userIdInput = new UserIdInput();
 		fakeEstablishmentInput = new EstablishmentInput();
@@ -112,6 +113,19 @@ public class DbAddEstablishmentTest {
 		);
 	}
 
+	@Test
+	void shouldThrowIfUserIsNotAOwner() {
+		doReturn(Optional.of(fakeUser))
+			.when(userRepository).findById(fakeUser.getId());
 
+		var userId = new UserIdInput();
+		userId.setId(fakeUser.getId().toString());
+		fakeEstablishmentInput.setOwner(userId);
+
+		assertThrows(
+			BusinessException.class,
+			() -> addEstablishment.add(fakeEstablishmentInput)
+		);
+	}
 
 }
