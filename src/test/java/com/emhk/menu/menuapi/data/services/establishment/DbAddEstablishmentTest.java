@@ -11,17 +11,14 @@ import com.emhk.menu.menuapi.domain.services.dtos.establishment.input.disassembl
 import com.emhk.menu.menuapi.domain.services.dtos.establishment.output.EstablishmentOutput;
 import com.emhk.menu.menuapi.domain.services.dtos.establishment.output.assembler.EstablishmentAssembler;
 import com.emhk.menu.menuapi.domain.services.dtos.user.input.UserIdInput;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -54,7 +51,7 @@ public class DbAddEstablishmentTest {
 	}
 
 	private User fakeOwner;
-	private User fakeUser;
+//	private User fakeUser;
 	private EstablishmentInput fakeEstablishmentInput;
 	private Establishment fakeEstablishmentSaved;
 	private Establishment fakeEstablishment;
@@ -67,10 +64,10 @@ public class DbAddEstablishmentTest {
 		fakeOwner.setId(ownerId);
 		fakeOwner.setRole(UserRole.OWNER);
 
-		var userId = UUID.randomUUID();
-		fakeUser = new User();
-		fakeUser.setId(userId);
-		fakeUser.setRole(UserRole.CUSTOMER);
+//		var userId = UUID.randomUUID();
+//		fakeUser = new User();
+//		fakeUser.setId(userId);
+//		fakeUser.setRole(UserRole.CUSTOMER);
 
 		var userIdInput = new UserIdInput();
 		fakeEstablishmentInput = new EstablishmentInput();
