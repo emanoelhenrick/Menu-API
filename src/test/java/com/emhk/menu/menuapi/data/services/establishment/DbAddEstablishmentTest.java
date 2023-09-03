@@ -8,7 +8,6 @@ import com.emhk.menu.menuapi.domain.models.UserRole;
 import com.emhk.menu.menuapi.domain.repository.EstablishmentRepository;
 import com.emhk.menu.menuapi.domain.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
@@ -46,8 +45,8 @@ public class DbAddEstablishmentTest {
 		given(userRepository.findById(any()))
 			.willReturn(Optional.of(fakeOwner));
 
-//		given(establishmentRepository.save(any()))
-//			.willReturn(Optional.of(fakeEstablishment));
+		given(establishmentRepository.save(any()))
+			.willReturn(fakeEstablishment);
 	}
 
 	@Test
@@ -73,18 +72,12 @@ public class DbAddEstablishmentTest {
 			.isInstanceOf(AccessDeniedException.class);
 	}
 
-//	@Test
-//	@Disabled
-//	void shouldReturnAEstablishmentIfUserIsOwner() {
-//		given(establishmentRepository.save(any()))
-//			.willReturn(fakeEstablishment);
-//
-//		var establishment = addEstablishment.add(fakeEstablishment);
-//
-//		assertThat(establishment)
-//			.isInstanceOf(Establishment.class);
-//	}
+	@Test
+	void shouldReturnAEstablishmentIfUserIsOwner() {
+		var establishment = addEstablishment.add(fakeEstablishment);
 
-
+		assertThat(establishment)
+			.isInstanceOf(Establishment.class);
+	}
 
 }
