@@ -1,8 +1,7 @@
 package com.emhk.menu.menuapi.domain.services.user;
 
-import com.emhk.menu.menuapi.domain.services.dtos.user.input.UserInput;
-import com.emhk.menu.menuapi.domain.services.dtos.user.output.UserOutput;
+import com.emhk.menu.menuapi.domain.models.User;
 
 public interface AddAccount {
-  public UserOutput add(UserInput user);
+  public User add(User user);
 }

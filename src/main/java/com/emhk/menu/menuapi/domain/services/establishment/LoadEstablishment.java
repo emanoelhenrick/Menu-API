@@ -1,7 +1,7 @@
 package com.emhk.menu.menuapi.domain.services.establishment;
 
-import com.emhk.menu.menuapi.domain.services.dtos.establishment.output.EstablishmentOutput;
+import com.emhk.menu.menuapi.domain.models.Establishment;
 
 public interface LoadEstablishment {
-  public EstablishmentOutput load(String id);
+  public Establishment load(String id);
 }

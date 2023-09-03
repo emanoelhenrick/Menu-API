@@ -1,8 +1,7 @@
 package com.emhk.menu.menuapi.domain.services.establishment;
 
-import com.emhk.menu.menuapi.domain.services.dtos.establishment.input.EstablishmentInput;
-import com.emhk.menu.menuapi.domain.services.dtos.establishment.output.EstablishmentOutput;
+import com.emhk.menu.menuapi.domain.models.Establishment;
 
 public interface AddEstablishment {
-  public EstablishmentOutput add(EstablishmentInput input);
+  public Establishment add(Establishment establishment);
 }

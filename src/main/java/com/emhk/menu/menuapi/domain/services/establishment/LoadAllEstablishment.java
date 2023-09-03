@@ -2,9 +2,8 @@ package com.emhk.menu.menuapi.domain.services.establishment;
 
 import java.util.List;
 
-import com.emhk.menu.menuapi.domain.services.dtos.establishment.output.EstablishmentShortOutput;
-
+import com.emhk.menu.menuapi.domain.models.Establishment;
 
 public interface LoadAllEstablishment {
-  public List<EstablishmentShortOutput> loadAllByOwner(String id);
+  public List<Establishment> loadAllByOwner(String id);
 }
