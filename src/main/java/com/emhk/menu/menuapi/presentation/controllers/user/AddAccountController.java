@@ -1,5 +1,6 @@
 package com.emhk.menu.menuapi.presentation.controllers.user;
 
+import com.emhk.menu.menuapi.domain.services.user.AddAccount;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.user.input.disassembler.UserDisassembler;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.user.output.assembler.UserAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.emhk.menu.menuapi.data.services.user.DbAddAccount;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.user.input.UserInput;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.user.output.UserOutput;
 
@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 public class AddAccountController {
 
   @Autowired
-  private DbAddAccount addAccount;
+  private AddAccount addAccount;
 
   @Autowired
   private UserAssembler assembler;
