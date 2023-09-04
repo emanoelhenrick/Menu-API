@@ -3,6 +3,7 @@ package com.emhk.menu.menuapi.data.services.order;
 import java.util.List;
 import java.util.UUID;
 
+import com.emhk.menu.menuapi.domain.exceptions.Order.OrderNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.emhk.menu.menuapi.domain.models.Order;
@@ -21,7 +22,9 @@ public class DbAddProductsToOrder implements AddProductsToOrder {
 
   @Override
   public Order add(String orderUUID, List<Product> products) {
-    var order = orderRepository.findById(UUID.fromString(orderUUID)).orElseThrow();
+    var order = orderRepository
+      .findById(UUID.fromString(orderUUID))
+      .orElseThrow(() -> new OrderNotFoundException(orderUUID));
     products.forEach(product -> order.getProducts().add(product));
     return orderRepository.save(order);
   }
