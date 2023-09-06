@@ -2,6 +2,7 @@ package com.emhk.menu.menuapi.presentation.controllers.product;
 
 import com.emhk.menu.menuapi.domain.models.Product;
 import com.emhk.menu.menuapi.domain.repository.ProductRepository;
+import com.emhk.menu.menuapi.domain.services.product.LoadProduct;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.product.output.ProductOutput;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.product.output.assembler.ProductAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,14 @@ import java.util.UUID;
 public class LoadProductController {
 
 	@Autowired
-	private ProductRepository repository;
+	private LoadProduct loadProduct;
 
 	@Autowired
 	private ProductAssembler assembler;
 
 	@GetMapping
-	public ProductOutput carai(@PathVariable String id) {
-		var product = repository.findById(UUID.fromString(id)).orElseThrow();
+	public ProductOutput loadProductById(@PathVariable String id) {
+		var product = loadProduct.load(id);
 		return assembler.toDTO(product);
 	}
 
