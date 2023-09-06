@@ -16,7 +16,7 @@ import java.time.OffsetDateTime;
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler
+	@ExceptionHandler(EntityNotFoundException.class)
 	public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest req) {
 		var status = HttpStatus.NOT_FOUND;
 		var detail = ex.getMessage();
