@@ -1,17 +1,9 @@
 package com.emhk.menu.menuapi.domain.models;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -25,8 +17,12 @@ public class Product {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
+  @Column(nullable = false)
   private String name;
+
   private String description;
+
+  @Column(nullable = false)
   private BigDecimal price;
 
   private String imageUrl;
@@ -38,7 +34,7 @@ public class Product {
     joinColumns = @JoinColumn(name = "product_id"),
     inverseJoinColumns = @JoinColumn(name = "menu_id")
   )
-  private List<Menu> menu;
+  private List<Menu> menu = new ArrayList<>();
 
   @ManyToOne
   private Establishment establishment;
