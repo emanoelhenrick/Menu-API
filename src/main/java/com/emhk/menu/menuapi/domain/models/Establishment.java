@@ -2,24 +2,12 @@ package com.emhk.menu.menuapi.domain.models;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -51,16 +39,16 @@ public class Establishment {
   @OneToMany(mappedBy = "establishment")
   private List<Menu> menus = new ArrayList<>();
 
-  @OneToMany(mappedBy = "establishment")
-  private List<Product> products;
+  @OneToMany(mappedBy = "establishment", fetch = FetchType.LAZY)
+  private List<Product> products = new ArrayList<>();
   
   @Column(nullable = false)
   private BigDecimal freightRate;
 
-  @OneToMany(mappedBy = "establishment")
-  private List<Order> orders;
+  @OneToMany(mappedBy = "establishment", fetch = FetchType.LAZY)
+  private List<Order> orders = new ArrayList<>();
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
     name = "establishment_forms_of_payment",
     joinColumns = @JoinColumn(name = "establishment_id"),

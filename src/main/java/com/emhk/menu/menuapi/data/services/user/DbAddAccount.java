@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.emhk.menu.menuapi.domain.repository.UserRepository;
 import com.emhk.menu.menuapi.domain.services.user.AddAccount;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DbAddAccount implements AddAccount {
@@ -16,6 +17,7 @@ public class DbAddAccount implements AddAccount {
   }
 
   @Override
+  @Transactional
   public User add(User user) {
     return userRepository.save(user);
   }

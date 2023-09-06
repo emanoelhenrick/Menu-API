@@ -4,9 +4,11 @@ import com.emhk.menu.menuapi.domain.exceptions.Order.OrderNotFoundException;
 import com.emhk.menu.menuapi.domain.models.Order;
 import com.emhk.menu.menuapi.domain.repository.OrderRepository;
 import com.emhk.menu.menuapi.domain.services.order.LoadOrderById;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class DbLoadOrderById implements LoadOrderById {
 
 	private final OrderRepository orderRepository;

@@ -21,8 +21,8 @@ public class DbLoadEstablishment implements LoadEstablishment{
   @Override
   public Establishment load(String id) {
     return establishmentRepository
-        .findById(UUID.fromString(id))
-        .orElseThrow(() -> new EstablishmentNotFoundException(id));
+      .findById(UUID.fromString(id))
+      .orElseThrow(() -> new EstablishmentNotFoundException(id));
   }
   
 }
