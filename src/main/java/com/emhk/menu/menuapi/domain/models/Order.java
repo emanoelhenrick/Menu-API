@@ -2,22 +2,12 @@ package com.emhk.menu.menuapi.domain.models;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -33,15 +23,22 @@ public class Order {
   private UUID id;
 
   @ManyToOne
-  private User user;
+  @JoinColumn(nullable = false)
+  private User customer;
 
   @ManyToOne
+  @JoinColumn(nullable = false)
   private Establishment establishment;
 
-  private BigDecimal totalPrice;
+  private BigDecimal totalPrice = BigDecimal.ZERO;
 
-  @OneToMany
-  private List<Product> products;
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(
+    name = "orders_product",
+    joinColumns = @JoinColumn(name = "order_id"),
+    inverseJoinColumns = @JoinColumn(name = "productOrder_id")
+  )
+  private List<ProductOrder> products = new ArrayList<>();
 
   @Enumerated(EnumType.STRING)
   private OrderStatus status;
@@ -53,12 +50,5 @@ public class Order {
   @UpdateTimestamp
   @Column(columnDefinition = "timestamp")
   private OffsetDateTime updatedAt;
-
-  public void calcTotalPrice() {
-    BigDecimal total = new BigDecimal(0);
-    products.forEach(product -> total.add(product.getPrice()));
-    total.subtract(establishment.getFreightRate());
-    this.totalPrice = total;
-  }
 
 }
