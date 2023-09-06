@@ -1,8 +1,17 @@
 package com.emhk.menu.menuapi.domain.exceptions.Order;
 
-public class OrderNotFoundException extends RuntimeException {
+import com.emhk.menu.menuapi.domain.exceptions.EntityNotFoundException;
 
-	public OrderNotFoundException(String id) {
-		super("order with id: " + id + " not found");
+import java.util.UUID;
+
+public class OrderNotFoundException extends EntityNotFoundException {
+
+	public OrderNotFoundException(String reason) {
+		super(reason);
 	}
+
+	public OrderNotFoundException(UUID id) {
+		super("there is no Order with id " + id);
+	}
+
 }

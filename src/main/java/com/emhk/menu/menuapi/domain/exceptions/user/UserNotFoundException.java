@@ -1,7 +1,17 @@
 package com.emhk.menu.menuapi.domain.exceptions.user;
 
-public class UserNotFoundException extends RuntimeException {
-	public UserNotFoundException(String value) {
-		super(value);
+import com.emhk.menu.menuapi.domain.exceptions.EntityNotFoundException;
+
+import java.util.UUID;
+
+public class UserNotFoundException extends EntityNotFoundException {
+
+	public UserNotFoundException(String reason) {
+		super(reason);
 	}
+
+	public UserNotFoundException(UUID id) {
+		super("there is no User with id " + id.toString());
+	}
+
 }
