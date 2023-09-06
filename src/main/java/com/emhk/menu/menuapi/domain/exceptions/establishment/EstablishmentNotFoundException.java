@@ -6,11 +6,7 @@ import java.util.UUID;
 
 public class EstablishmentNotFoundException extends EntityNotFoundException {
 
-  public EstablishmentNotFoundException(String reason) {
-    super(reason);
-  }
-
-  public EstablishmentNotFoundException(UUID id) {
+  public EstablishmentNotFoundException(String id) {
     super("there is no Establishment with id " + id);
   }
 
