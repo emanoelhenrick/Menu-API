@@ -25,7 +25,4 @@ public class ProductInput {
   @NotBlank
   private String ingredients;
 
-  @NotNull
-  private String establishmentId;
-
 }

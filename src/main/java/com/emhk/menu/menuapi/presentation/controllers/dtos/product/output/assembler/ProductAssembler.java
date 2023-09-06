@@ -3,6 +3,7 @@ package com.emhk.menu.menuapi.presentation.controllers.dtos.product.output.assem
 import java.util.List;
 
 import com.emhk.menu.menuapi.presentation.controllers.dtos.product.output.ProductOutput;
+import com.emhk.menu.menuapi.presentation.controllers.dtos.product.output.ProductShortOutput;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,16 @@ public class ProductAssembler {
   public List<ProductOutput> toDTOCollection(List<Product> products) {
     return products.stream()
       .map(product -> toDTO(product))
+      .toList();
+  }
+
+  public ProductShortOutput toShortDTO(Product product) {
+    return mapper.map(product, ProductShortOutput.class);
+  }
+
+  public List<ProductShortOutput> toShortDTOCollection(List<Product> products) {
+    return products.stream()
+      .map(product -> toShortDTO(product))
       .toList();
   }
 }
