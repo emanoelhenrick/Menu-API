@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import com.emhk.menu.menuapi.domain.models.Order;
 import com.emhk.menu.menuapi.domain.repository.OrderRepository;
 import com.emhk.menu.menuapi.domain.services.order.AddProductsToOrder;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class DbAddProductsToOrder implements AddProductsToOrder {
 
   private final OrderRepository orderRepository;
