@@ -3,14 +3,11 @@ package com.emhk.menu.menuapi.data.services.order;
 import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
 import com.emhk.menu.menuapi.domain.exceptions.establishment.EstablishmentNotFoundException;
 import com.emhk.menu.menuapi.domain.exceptions.user.UserNotFoundException;
-import com.emhk.menu.menuapi.domain.models.Product;
 import com.emhk.menu.menuapi.domain.models.ProductOrder;
 import com.emhk.menu.menuapi.domain.models.UserRole;
 import com.emhk.menu.menuapi.domain.repository.EstablishmentRepository;
 import com.emhk.menu.menuapi.domain.repository.ProductRepository;
 import com.emhk.menu.menuapi.domain.repository.UserRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 
 import com.emhk.menu.menuapi.domain.models.Order;
@@ -19,10 +16,7 @@ import com.emhk.menu.menuapi.domain.services.order.CreateOrder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class DbCreateOrder implements CreateOrder {
