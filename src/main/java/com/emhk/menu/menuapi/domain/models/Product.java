@@ -28,6 +28,9 @@ public class Product {
   private String imageUrl;
   private String ingredients;
 
+  @Column(nullable = false)
+  private Boolean active = true;
+
   @ManyToMany
   @JoinTable(
     name = "product_menu",
