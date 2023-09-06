@@ -4,6 +4,7 @@ import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
 import com.emhk.menu.menuapi.domain.exceptions.Order.OrderEmptyException;
 import com.emhk.menu.menuapi.domain.exceptions.establishment.AccessDeniedException;
 import com.emhk.menu.menuapi.domain.exceptions.establishment.EstablishmentNotFoundException;
+import com.emhk.menu.menuapi.domain.exceptions.product.ProductNotAvailable;
 import com.emhk.menu.menuapi.domain.exceptions.product.ProductNotFoundException;
 import com.emhk.menu.menuapi.domain.exceptions.user.UserNotFoundException;
 import com.emhk.menu.menuapi.domain.models.ProductOrder;
@@ -22,6 +23,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class DbCreateOrder implements CreateOrder {
 
   private final OrderRepository orderRepository;
@@ -42,7 +44,6 @@ public class DbCreateOrder implements CreateOrder {
   }
 
   @Override
-  @Transactional
   public Order create(String establishmentId, Order order) {
     if (order.getProducts().isEmpty()) throw new OrderEmptyException();
 
@@ -62,6 +63,9 @@ public class DbCreateOrder implements CreateOrder {
       var productId = product.getProduct().getId();
       var productRef = productRepository.findById(productId)
         .orElseThrow(() -> new ProductNotFoundException(productId.toString()));
+      if (!productRef.getActive()) {
+        throw new ProductNotAvailable(productId.toString());
+      }
 
       var productTotalPrice = productRef.getPrice()
         .multiply(BigDecimal.valueOf(product.getQuantity()));
