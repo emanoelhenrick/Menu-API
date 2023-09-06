@@ -11,7 +11,6 @@ import java.util.List;
 public class ProblemDetails {
 
   private Integer status;
-  private String type;
   private String title;
   private String detail;
   private String userMessage;
