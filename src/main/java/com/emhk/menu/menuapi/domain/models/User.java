@@ -1,7 +1,6 @@
 package com.emhk.menu.menuapi.domain.models;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,9 +42,9 @@ public class User {
   private UserRole role;
 
   @OneToMany(mappedBy = "owner")
-  private List<Establishment> establishments;
+  private List<Establishment> establishments = new ArrayList<>();
 
-  @OneToMany(mappedBy = "user")
-  private List<Order> orders;
+  @OneToMany(mappedBy = "customer")
+  private List<Order> orders = new ArrayList<>();
 
 }
