@@ -59,16 +59,16 @@ public class DbCreateOrder implements CreateOrder {
     order.setEstablishment(establishment);
 
     var totalPrice = BigDecimal.ZERO;
-    for (ProductOrder product : order.getProducts()) {
-      var productId = product.getProduct().getId();
-      var productRef = productRepository.findById(productId)
-        .orElseThrow(() -> new ProductNotFoundException(productId.toString()));
-      if (!productRef.getActive()) {
-        throw new ProductNotAvailable(productId.toString());
-      }
+    for (ProductOrder productOrder : order.getProducts()) {
+      var productId = productOrder.getProductId();
+      var product = productRepository.findById(UUID.fromString(productId))
+        .orElseThrow(() -> new ProductNotFoundException(productId));
 
-      var productTotalPrice = productRef.getPrice()
-        .multiply(BigDecimal.valueOf(product.getQuantity()));
+      if (!product.getActive()) throw new ProductNotAvailable(productId);
+
+      productOrder.setUnitPrice(product.getPrice());
+      var productTotalPrice = product.getPrice()
+        .multiply(BigDecimal.valueOf(productOrder.getQuantity()));
       totalPrice = totalPrice.add(productTotalPrice);
     }
     order.setTotalPrice(totalPrice);
