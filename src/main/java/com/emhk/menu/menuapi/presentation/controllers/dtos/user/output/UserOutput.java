@@ -6,8 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserOutput {
-
-  private String id;
   private String username;
-
 }

@@ -6,8 +6,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserIdInput {
+public class UserUsernameInput {
 
   @NotBlank
-  private String id;
+  private String username;
+
 }
