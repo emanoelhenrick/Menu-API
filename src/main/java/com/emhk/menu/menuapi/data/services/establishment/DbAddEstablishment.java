@@ -26,12 +26,11 @@ public class DbAddEstablishment implements AddEstablishment {
 
   @Override
   public Establishment add(Establishment establishment) {
-    var ownerId = establishment.getOwner().getId();
-    var owner = userRepository.findById(ownerId)
-      .orElseThrow(() -> new UserNotFoundException(establishment.getOwner().getId().toString()));
-    if (owner.getRole() != UserRole.OWNER) {
-      throw new AccessDeniedException();
-    }
+    var ownerUsername = establishment.getOwner().getUsername();
+    var owner = userRepository.findByUsername(ownerUsername)
+      .orElseThrow(() -> new UserNotFoundException(ownerUsername));
+    if (owner.getRole() != UserRole.OWNER) throw new AccessDeniedException();
+    establishment.setOwner(owner);
     return establishmentRepository.save(establishment);
   }
   
