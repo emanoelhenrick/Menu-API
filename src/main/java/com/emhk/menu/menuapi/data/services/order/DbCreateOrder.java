@@ -1,6 +1,6 @@
 package com.emhk.menu.menuapi.data.services.order;
 
-import com.emhk.menu.menuapi.domain.exceptions.Order.OrderEmptyException;
+import com.emhk.menu.menuapi.domain.exceptions.order.OrderEmptyException;
 import com.emhk.menu.menuapi.domain.exceptions.establishment.AccessDeniedException;
 import com.emhk.menu.menuapi.domain.exceptions.establishment.EstablishmentNotFoundException;
 import com.emhk.menu.menuapi.domain.exceptions.product.ProductNotAvailable;

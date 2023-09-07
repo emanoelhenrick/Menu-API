@@ -1,4 +1,4 @@
-package com.emhk.menu.menuapi.domain.exceptions.Order;
+package com.emhk.menu.menuapi.domain.exceptions.order;
 
 import com.emhk.menu.menuapi.domain.exceptions.EntityNotFoundException;
 

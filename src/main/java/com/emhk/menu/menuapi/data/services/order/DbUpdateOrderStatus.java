@@ -2,7 +2,7 @@ package com.emhk.menu.menuapi.data.services.order;
 
 import java.util.UUID;
 
-import com.emhk.menu.menuapi.domain.exceptions.Order.OrderNotFoundException;
+import com.emhk.menu.menuapi.domain.exceptions.order.OrderNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.emhk.menu.menuapi.domain.models.OrderStatus;
