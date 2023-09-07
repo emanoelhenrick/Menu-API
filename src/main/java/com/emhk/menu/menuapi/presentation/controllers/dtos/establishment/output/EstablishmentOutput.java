@@ -9,6 +9,7 @@ import com.emhk.menu.menuapi.domain.models.FormOfPayment;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.address.AddressOutput;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.user.output.UserIdOutput;
 
+import com.emhk.menu.menuapi.presentation.controllers.dtos.user.output.UserOutput;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,7 @@ import lombok.Setter;
 public class EstablishmentOutput {
 
   private String id;
-  private UserIdOutput owner;
+  private UserOutput owner;
   private String name;
   private AddressOutput address;
   private OffsetDateTime createdAt;
