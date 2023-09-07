@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Getter
@@ -20,5 +21,6 @@ public class OrderOutput {
 	private OrderStatus status;
 	private UserOutput customer;
 	private EstablishmentShortOutput establishment;
+	private OffsetDateTime createdAt;
 
 }
