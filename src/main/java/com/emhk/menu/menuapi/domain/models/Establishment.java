@@ -1,6 +1,5 @@
 package com.emhk.menu.menuapi.domain.models;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.*;
 
@@ -41,9 +40,6 @@ public class Establishment {
 
   @OneToMany(mappedBy = "establishment", fetch = FetchType.LAZY)
   private List<Product> products = new ArrayList<>();
-  
-  @Column(nullable = false)
-  private BigDecimal freightRate;
 
   @OneToMany(mappedBy = "establishment", fetch = FetchType.LAZY)
   private List<Order> orders = new ArrayList<>();
