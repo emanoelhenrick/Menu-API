@@ -22,7 +22,6 @@ public class EstablishmentOutput {
   private AddressOutput address;
   private OffsetDateTime createdAt;
   private OffsetDateTime updatedAt;
-  private BigDecimal freightRate;
   private List<FormOfPayment> formsOfPayment = new ArrayList<>();
 
 }

@@ -13,7 +13,6 @@ public class EstablishmentInput {
 
 	private UserIdInput owner;
 	private String name;
-	private BigDecimal freightRate;
 	private AddressInput address;
 
 }
