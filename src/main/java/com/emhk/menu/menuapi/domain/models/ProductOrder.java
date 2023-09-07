@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
+
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -14,9 +16,11 @@ public class ProductOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
-	@JoinColumn(nullable = false)
-	private Product product;
+	@Column(nullable = false)
+	private String productId;
+
+	@Column(nullable = false)
+	private BigDecimal unitPrice;
 
 	@Column(nullable = false)
 	private Integer quantity;
