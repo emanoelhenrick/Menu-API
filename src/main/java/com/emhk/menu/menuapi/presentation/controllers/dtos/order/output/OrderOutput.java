@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 public class OrderOutput {
 
+	private String id;
 	private List<ProductOrderOutput> products;
 	private BigDecimal totalPrice;
 	private OrderStatus status;
