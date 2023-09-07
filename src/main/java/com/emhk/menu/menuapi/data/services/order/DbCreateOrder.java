@@ -52,6 +52,7 @@ public class DbCreateOrder implements CreateOrder {
       .findById(customerId)
       .orElseThrow(() -> new UserNotFoundException(customerId.toString()));
     if (customer.getRole() != UserRole.CUSTOMER) throw new AccessDeniedException();
+    order.setCustomer(customer);
 
     var establishment = establishmentRepository
       .findById(UUID.fromString(establishmentId))
