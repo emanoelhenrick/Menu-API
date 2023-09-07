@@ -16,10 +16,12 @@ public class UserDisassembler {
   }
   
   public User toDomainModel(UserInput input) {
+    input.setRole(input.getRole().toUpperCase());
     return mapper.map(input, User.class);
   }
 
   public void copyToDomainObject(UserInput input, User user) {
+    input.setRole(input.getRole().toUpperCase());
     mapper.map(input, user);
   }
 
