@@ -7,7 +7,6 @@ import com.emhk.menu.menuapi.domain.services.order.FindOrdersByUser;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DbFindOrdersByUser implements FindOrdersByUser {
@@ -19,9 +18,9 @@ public class DbFindOrdersByUser implements FindOrdersByUser {
   }
 
   @Override
-  public List<Order> find(String userId) {
-    var user = userRepository.findById(UUID.fromString(userId))
-      .orElseThrow(() -> new UserNotFoundException(userId));
+  public List<Order> find(String username) {
+    var user = userRepository.findByUsername(username)
+      .orElseThrow(() -> new UserNotFoundException(username));
     return user.getOrders();
   }
 
