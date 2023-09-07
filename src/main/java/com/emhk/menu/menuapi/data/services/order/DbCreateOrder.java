@@ -1,6 +1,5 @@
 package com.emhk.menu.menuapi.data.services.order;
 
-import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
 import com.emhk.menu.menuapi.domain.exceptions.Order.OrderEmptyException;
 import com.emhk.menu.menuapi.domain.exceptions.establishment.AccessDeniedException;
 import com.emhk.menu.menuapi.domain.exceptions.establishment.EstablishmentNotFoundException;
@@ -47,10 +46,10 @@ public class DbCreateOrder implements CreateOrder {
   public Order create(String establishmentId, Order order) {
     if (order.getProducts().isEmpty()) throw new OrderEmptyException();
 
-    var customerId = order.getCustomer().getId();
+    var customerUsername = order.getCustomer().getUsername();
     var customer = userRepository
-      .findById(customerId)
-      .orElseThrow(() -> new UserNotFoundException(customerId.toString()));
+      .findByUsername(customerUsername)
+      .orElseThrow(() -> new UserNotFoundException(customerUsername));
     if (customer.getRole() != UserRole.CUSTOMER) throw new AccessDeniedException();
     order.setCustomer(customer);
 
