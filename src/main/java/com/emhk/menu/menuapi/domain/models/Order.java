@@ -34,7 +34,7 @@ public class Order {
 
   @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
-    name = "orders_product",
+    name = "order_product_order",
     joinColumns = @JoinColumn(name = "order_id"),
     inverseJoinColumns = @JoinColumn(name = "productOrder_id")
   )
