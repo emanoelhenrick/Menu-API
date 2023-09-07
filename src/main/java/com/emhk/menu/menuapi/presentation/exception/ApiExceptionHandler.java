@@ -1,6 +1,8 @@
 package com.emhk.menu.menuapi.presentation.exception;
 
+import com.emhk.menu.menuapi.domain.exceptions.EntityNotAvailable;
 import com.emhk.menu.menuapi.domain.exceptions.EntityNotFoundException;
+import com.emhk.menu.menuapi.domain.exceptions.InUseEntityException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -21,6 +23,28 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		var status = HttpStatus.NOT_FOUND;
 		var detail = ex.getMessage();
 		var problemType = ProblemType.RESOURCE_NOT_FOUND;
+		var body = makeProblemBuilder(status, problemType, detail)
+			.userMessage(detail)
+			.build();
+		return handleExceptionInternal(ex, body, new HttpHeaders(), status, req);
+	}
+
+	@ExceptionHandler(EntityNotAvailable.class)
+	public ResponseEntity<?> handleEntityNotAvailable(EntityNotAvailable ex, WebRequest req) {
+		var status = HttpStatus.UNAUTHORIZED;
+		var detail = ex.getMessage();
+		var problemType = ProblemType.ENTITY_NOT_AVAILABLE;
+		var body = makeProblemBuilder(status, problemType, detail)
+			.userMessage(detail)
+			.build();
+		return handleExceptionInternal(ex, body, new HttpHeaders(), status, req);
+	}
+
+	@ExceptionHandler(InUseEntityException.class)
+	public ResponseEntity<?> handleInUseEntityException(InUseEntityException ex, WebRequest req) {
+		var status = HttpStatus.CONFLICT;
+		var detail = ex.getMessage();
+		var problemType = ProblemType.IN_USE_ENTITY;
 		var body = makeProblemBuilder(status, problemType, detail)
 			.userMessage(detail)
 			.build();
