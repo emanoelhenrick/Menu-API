@@ -3,6 +3,7 @@ package com.emhk.menu.menuapi.presentation.exception;
 import com.emhk.menu.menuapi.domain.exceptions.EntityNotAvailable;
 import com.emhk.menu.menuapi.domain.exceptions.EntityNotFoundException;
 import com.emhk.menu.menuapi.domain.exceptions.InUseEntityException;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -47,6 +48,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		var problemType = ProblemType.IN_USE_ENTITY;
 		var body = makeProblemBuilder(status, problemType, detail)
 			.userMessage(detail)
+			.build();
+		return handleExceptionInternal(ex, body, new HttpHeaders(), status, req);
+	}
+
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<?> handleExceptions(Exception ex, WebRequest req) {
+		var status = HttpStatus.INTERNAL_SERVER_ERROR;
+		var detail = ex.getMessage();
+		var problemType = ProblemType.INTERNAL_SERVER_ERROR;
+		var body = makeProblemBuilder(status, problemType, detail)
+			.userMessage("An unexpected system error occurred, please try again and if the problem persists, contact support.")
 			.build();
 		return handleExceptionInternal(ex, body, new HttpHeaders(), status, req);
 	}
