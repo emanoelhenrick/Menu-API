@@ -43,7 +43,7 @@ public class DbCreateOrder implements CreateOrder {
   }
 
   @Override
-  public Order create(String establishmentId, Order order) {
+  public Order create(Order order) {
     if (order.getProducts().isEmpty()) throw new OrderEmptyException();
 
     var customerUsername = order.getCustomer().getUsername();
@@ -53,6 +53,7 @@ public class DbCreateOrder implements CreateOrder {
     if (customer.getRole() != UserRole.CUSTOMER) throw new AccessDeniedException();
     order.setCustomer(customer);
 
+    var establishmentId = order.getEstablishment().getId().toString();
     var establishment = establishmentRepository
       .findById(UUID.fromString(establishmentId))
       .orElseThrow(() -> new EstablishmentNotFoundException(establishmentId));
