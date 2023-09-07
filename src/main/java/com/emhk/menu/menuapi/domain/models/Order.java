@@ -41,7 +41,7 @@ public class Order {
   private List<ProductOrder> products = new ArrayList<>();
 
   @Enumerated(EnumType.STRING)
-  private OrderStatus status;
+  private OrderStatus status = OrderStatus.CREATED;
 
   @CreationTimestamp
   @Column(columnDefinition = "timestamp")
