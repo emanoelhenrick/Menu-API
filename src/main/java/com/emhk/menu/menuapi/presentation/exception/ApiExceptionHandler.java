@@ -31,7 +31,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(EntityNotAvailable.class)
 	public ResponseEntity<?> handleEntityNotAvailable(EntityNotAvailable ex, WebRequest req) {
-		var status = HttpStatus.UNAUTHORIZED;
+		var status = HttpStatus.FORBIDDEN;
 		var detail = ex.getMessage();
 		var problemType = ProblemType.ENTITY_NOT_AVAILABLE;
 		var body = makeProblemBuilder(status, problemType, detail)
