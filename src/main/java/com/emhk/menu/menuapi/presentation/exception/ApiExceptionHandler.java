@@ -9,6 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
@@ -27,6 +29,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 			.userMessage("An unexpected system error occurred, please try again and if the problem persists, contact support.")
 			.build();
 		return makeResponseEntity(ex, body, new HttpHeaders(), status, req);
+	}
+
+	@Override
+	protected ResponseEntity<Object> handleNoHandlerFoundException(
+		NoHandlerFoundException ex, HttpHeaders headers, HttpStatusCode statusCode, WebRequest req
+	) {
+		var status = HttpStatus.resolve(statusCode.value());
+		var problemType = ProblemType.RESOURCE_NOT_FOUND;
+		var detail = ex.getMessage();
+		var body = makeProblemBuilder(status, problemType, detail)
+			.userMessage(detail)
+			.build();
+		return makeResponseEntity(ex, body, headers, status, req);
 	}
 
 	@Override
@@ -59,6 +74,22 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		Exception ex, Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest req
 	) {
 		var status = HttpStatus.resolve(statusCode.value());
+		return makeResponseEntity(ex, body, headers, status, req);
+	}
+
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public ResponseEntity<?> handleMethodArgumentTypeMismatch(
+		MethodArgumentTypeMismatchException ex, HttpHeaders headers, HttpStatusCode statusCode, WebRequest req
+	) {
+		var status = HttpStatus.BAD_REQUEST;
+		var problemType = ProblemType.INVALID_PARAMETER;
+		var detail = String.format(
+			"The URL parameter '%s' received '%s' which is of an invalid type, enter a value of type '%s'.",
+			ex.getParameter().getParameterName(), ex.getValue().toString(), ex.getRequiredType().getSimpleName()
+		);
+		var body = makeProblemBuilder(status, problemType, detail)
+			.userMessage(detail)
+			.build();
 		return makeResponseEntity(ex, body, headers, status, req);
 	}
 }
