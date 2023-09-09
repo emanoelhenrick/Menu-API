@@ -5,6 +5,7 @@ import java.time.OffsetDateTime;
 import java.util.*;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,6 +26,10 @@ public class Order {
   @ManyToOne
   @JoinColumn(nullable = false)
   private User customer;
+
+  @ManyToOne
+  @JoinColumn(nullable = false)
+  private Table table;
 
   @ManyToOne
   @JoinColumn(nullable = false)
