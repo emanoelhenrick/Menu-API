@@ -20,10 +20,10 @@ public class DbLoadAllEstablishment implements LoadAllEstablishment {
   }
 
   @Override
-  public List<Establishment> loadAllByOwner(String id) {
+  public List<Establishment> loadAllByOwner(String username) {
 		return establishmentRepository
-      .findAllByOwnerId(UUID.fromString(id))
-      .orElseThrow(() -> new UserNotFoundException(id));
+      .findAllByOwnerUsername(username)
+      .orElseThrow(() -> new UserNotFoundException(username));
   }
   
 }
