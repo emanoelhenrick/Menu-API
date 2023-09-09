@@ -9,6 +9,7 @@ public enum ProblemType {
   INTERNAL_SERVER_ERROR("Internal server error."),
   BAD_REQUEST("Bad request."),
   INVALID_DATA("Invalid data."),
+  INVALID_PARAMETER("Invalid parameter."),
   ENTITY_NOT_AVAILABLE("Entity not available.");
 
   ProblemType(String title) {}
