@@ -11,7 +11,7 @@ import com.emhk.menu.menuapi.presentation.controllers.dtos.establishment.output.
 import com.emhk.menu.menuapi.domain.services.establishment.LoadEstablishment;
 
 @RestController
-@RequestMapping("/establishment")
+@RequestMapping("/establishment/{id}")
 public class LoadEstablishmentController {
 
   @Autowired
@@ -20,7 +20,7 @@ public class LoadEstablishmentController {
   @Autowired
   private EstablishmentAssembler assembler;
 
-  @GetMapping("/{id}")
+  @GetMapping
   public EstablishmentOutput loadEstablishmentById(@PathVariable String id) {
     var establishment = loadEstablishment.load(id);
     return assembler.toDTO(establishment);
