@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.emhk.menu.menuapi.domain.models.Establishment;
 
 public interface EstablishmentRepository extends JpaRepository<Establishment, UUID> {
-  Optional<List<Establishment>> findAllByOwnerId(UUID id);
+  Optional<List<Establishment>> findAllByOwnerUsername(String username);
 }
