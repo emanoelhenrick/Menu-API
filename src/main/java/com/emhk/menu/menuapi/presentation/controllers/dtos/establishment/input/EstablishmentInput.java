@@ -11,9 +11,6 @@ import lombok.Setter;
 @Setter
 public class EstablishmentInput {
 
-	@Valid
-	private UserUsernameInput owner;
-
 	@NotBlank
 	private String name;
 
