@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.emhk.menu.menuapi.domain.models.OrderStatus;
 import com.emhk.menu.menuapi.domain.repository.OrderRepository;
 import com.emhk.menu.menuapi.domain.services.order.UpdateOrderStatus;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class DbUpdateOrderStatus implements UpdateOrderStatus {
 
   private final OrderRepository orderRepository;
