@@ -5,16 +5,13 @@ import java.util.List;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.establishment.input.disassembler.EstablishmentDisassembler;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.establishment.output.assembler.EstablishmentAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.emhk.menu.menuapi.presentation.controllers.dtos.establishment.output.EstablishmentShortOutput;
 import com.emhk.menu.menuapi.domain.services.establishment.LoadAllEstablishment;
 
 @RestController
-@RequestMapping("/establishment")
+@RequestMapping("/user/{ownerUsername}/establishment")
 public class LoadAllEstablishmentController {
 
   @Autowired
@@ -24,8 +21,8 @@ public class LoadAllEstablishmentController {
   private EstablishmentAssembler assembler;
 
   @GetMapping
-  public List<EstablishmentShortOutput> loadAllEstablishmentByOwner(@RequestParam(required = true) String ownerId) {
-    var establishments = loadAllEstablishment.loadAllByOwner(ownerId);
+  public List<EstablishmentShortOutput> loadAllEstablishmentByOwner(@PathVariable String ownerUsername) {
+    var establishments = loadAllEstablishment.loadAllByOwner(ownerUsername);
     return assembler.toShortDTOCollection(establishments);
   }
   
