@@ -1,9 +1,9 @@
 package com.emhk.menu.menuapi.domain.services.order;
 
 import com.emhk.menu.menuapi.domain.models.Order;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface FindOrdersByUser {
-  List<Order> find(String username);
+  Page<Order> find(String username, Pageable pageable);
 }
