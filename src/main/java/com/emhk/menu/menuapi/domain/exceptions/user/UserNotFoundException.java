@@ -6,8 +6,8 @@ import java.util.UUID;
 
 public class UserNotFoundException extends EntityNotFoundException {
 
-	public UserNotFoundException(String id) {
-		super("there is no User with username: " + id);
+	public UserNotFoundException(String username) {
+		super("there is no User with username: " + username);
 	}
 
 }
