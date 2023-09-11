@@ -28,8 +28,8 @@ public class Order {
   private User customer;
 
   @ManyToOne
-  @JoinColumn(nullable = false)
-  private Table table;
+//  @JoinColumn(nullable = false)
+  private EstablishmentTable establishmentTable;
 
   @ManyToOne
   @JoinColumn(nullable = false)
