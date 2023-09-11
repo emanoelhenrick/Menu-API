@@ -4,13 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Table {
+public class EstablishmentTable {
 
   @Id
   @EqualsAndHashCode.Include
