@@ -16,6 +16,7 @@ import java.util.List;
 public class OrderOutput {
 
 	private String id;
+	private int tableNumber;
 	private List<ProductOrderOutput> products;
 	private BigDecimal totalPrice;
 	private OrderStatus status;
