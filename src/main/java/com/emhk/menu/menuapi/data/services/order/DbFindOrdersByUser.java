@@ -5,9 +5,10 @@ import com.emhk.menu.menuapi.domain.models.Order;
 import com.emhk.menu.menuapi.domain.repository.OrderRepository;
 import com.emhk.menu.menuapi.domain.repository.UserRepository;
 import com.emhk.menu.menuapi.domain.services.order.FindOrdersByUser;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DbFindOrdersByUser implements FindOrdersByUser {
@@ -21,7 +22,7 @@ public class DbFindOrdersByUser implements FindOrdersByUser {
   }
 
   @Override
-  public Page<Order> find(String username, Pageable pageable) {
+  public List<Order> find(String username, Pageable pageable) {
     userRepository.findByUsername(username)
       .orElseThrow(() -> new UserNotFoundException(username));
     return orderRepository.findAllByCustomerUsername(username, pageable);
