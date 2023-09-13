@@ -1,8 +1,5 @@
 package com.emhk.menu.menuapi.data.services.establishment;
 
-import java.util.List;
-import java.util.UUID;
-
 import com.emhk.menu.menuapi.domain.exceptions.user.UserNotFoundException;
 import com.emhk.menu.menuapi.domain.models.Establishment;
 import com.emhk.menu.menuapi.domain.repository.UserRepository;
