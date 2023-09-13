@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class EstablishmentTableOutput {
 
-  private String id;
+  private Long id;
   private int number;
   private EstablishmentShortOutput establishment;
   private Boolean isBusy;
