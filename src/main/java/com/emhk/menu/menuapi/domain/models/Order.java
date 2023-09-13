@@ -27,9 +27,7 @@ public class Order {
   @JoinColumn(nullable = false)
   private User customer;
 
-  @ManyToOne
-//  @JoinColumn(nullable = false)
-  private EstablishmentTable establishmentTable;
+  private int tableNumber;
 
   @ManyToOne
   @JoinColumn(nullable = false)
