@@ -19,6 +19,9 @@ public class EstablishmentTable {
   @Column(nullable = false)
   private int number;
 
+  @ManyToOne
+  private Establishment establishment;
+
   @Column(nullable = false)
   private Boolean isBusy = false;
 

@@ -44,6 +44,9 @@ public class Establishment {
   @OneToMany(mappedBy = "establishment", fetch = FetchType.LAZY)
   private List<Order> orders = new ArrayList<>();
 
+  @OneToMany(mappedBy = "establishment", fetch = FetchType.LAZY)
+  private List<EstablishmentTable> establishmentTables = new ArrayList<>();
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
     name = "establishment_forms_of_payment",
