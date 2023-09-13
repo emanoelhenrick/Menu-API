@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.emhk.menu.menuapi.domain.repository.EstablishmentRepository;
 import com.emhk.menu.menuapi.domain.services.establishment.LoadAllEstablishment;
 
+import java.util.List;
+
 @Service
 public class DbLoadAllEstablishment implements LoadAllEstablishment {
 
@@ -22,7 +24,7 @@ public class DbLoadAllEstablishment implements LoadAllEstablishment {
   }
 
   @Override
-  public Page<Establishment> loadAllByOwner(String username, Pageable pageable) {
+  public List<Establishment> loadAllByOwner(String username, Pageable pageable) {
     userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException(username));
 		return establishmentRepository.findAllByOwnerUsername(username, pageable);
   }
