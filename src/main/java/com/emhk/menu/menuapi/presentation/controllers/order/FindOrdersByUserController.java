@@ -25,8 +25,8 @@ public class FindOrdersByUserController {
   @GetMapping
   public Page<OrderOutput> findOrders(@PathVariable String username, Pageable pageable) {
     var ordersPage = findOrdersByUser.find(username, pageable);
-    var orders = assembler.toDTOCollection(ordersPage.getContent());
-    return new PageImpl<OrderOutput>(orders, pageable, ordersPage.getTotalElements());
+    var orders = assembler.toDTOCollection(ordersPage);
+    return new PageImpl<OrderOutput>(orders, pageable, pageable.getPageSize());
   }
 
 }
