@@ -1,10 +1,10 @@
 package com.emhk.menu.menuapi.presentation.controllers.establishment;
 
-import java.util.List;
-
-import com.emhk.menu.menuapi.presentation.controllers.dtos.establishment.input.disassembler.EstablishmentDisassembler;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.establishment.output.assembler.EstablishmentAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import com.emhk.menu.menuapi.presentation.controllers.dtos.establishment.output.EstablishmentShortOutput;
@@ -21,9 +21,12 @@ public class LoadAllEstablishmentController {
   private EstablishmentAssembler assembler;
 
   @GetMapping
-  public List<EstablishmentShortOutput> loadAllEstablishmentByOwner(@PathVariable String ownerUsername) {
-    var establishments = loadAllEstablishment.loadAllByOwner(ownerUsername);
-    return assembler.toShortDTOCollection(establishments);
+  public Page<EstablishmentShortOutput> loadAllEstablishmentByOwner(
+    @PathVariable String ownerUsername, Pageable pageable
+  ) {
+    var establishments = loadAllEstablishment.loadAllByOwner(ownerUsername, pageable);
+    var establishmentsDto = assembler.toShortDTOCollection(establishments);
+    return new PageImpl<EstablishmentShortOutput>(establishmentsDto, pageable, pageable.getPageSize());
   }
   
 }
