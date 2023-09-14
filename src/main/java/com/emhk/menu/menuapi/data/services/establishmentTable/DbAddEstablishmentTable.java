@@ -25,7 +25,7 @@ public class DbAddEstablishmentTable implements AddEstablishmentTable {
   @Override
   public EstablishmentTable add(EstablishmentTable establishmentTable, String establishmentId) {
     var establishment = establishmentRepository.findById(UUID.fromString(establishmentId))
-      .orElseThrow(() -> new EstablishmentNotFoundException(establishmentId.toString()));
+      .orElseThrow(() -> new EstablishmentNotFoundException(establishmentId));
     establishmentTable.setEstablishment(establishment);
     return establishmentTableRepository.save(establishmentTable);
   }
