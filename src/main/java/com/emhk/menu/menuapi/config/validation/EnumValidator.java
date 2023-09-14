@@ -1,4 +1,4 @@
-package com.emhk.menu.menuapi.core.validation;
+package com.emhk.menu.menuapi.config.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

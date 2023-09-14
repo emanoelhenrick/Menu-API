@@ -1,6 +1,6 @@
 package com.emhk.menu.menuapi.presentation.controllers.dtos.user.input;
 
-import com.emhk.menu.menuapi.core.validation.EnumValidator;
+import com.emhk.menu.menuapi.config.validation.EnumValidator;
 import com.emhk.menu.menuapi.domain.models.UserRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package com.emhk.menu.menuapi.core.modelmapper;
+package com.emhk.menu.menuapi.config.modelmapper;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

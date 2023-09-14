@@ -1,4 +1,4 @@
-package com.emhk.menu.menuapi.core.jackson;
+package com.emhk.menu.menuapi.config.jackson;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
