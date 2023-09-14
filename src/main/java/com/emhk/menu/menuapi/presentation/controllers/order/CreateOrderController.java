@@ -27,12 +27,9 @@ public class CreateOrderController {
 	private OrderAssembler assembler;
 
 	@PostMapping
-	public OrderOutput createOrder(@PathVariable String establishmentId, @Valid @RequestBody OrderInput orderInput) {
+	public OrderOutput createOrder(@Valid @RequestBody OrderInput orderInput, @PathVariable String establishmentId) {
 		var orderToSave = disassembler.toDomainModel(orderInput);
-		var establishment = new Establishment();
-		establishment.setId(UUID.fromString(establishmentId));
-		orderToSave.setEstablishment(establishment);
-		var order = createOrder.create(orderToSave);
+		var order = createOrder.create(orderToSave, establishmentId);
 		return assembler.toDTO(order);
 	}
 
