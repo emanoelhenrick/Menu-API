@@ -7,6 +7,8 @@ import com.emhk.menu.menuapi.domain.repository.EstablishmentTableRepository;
 import com.emhk.menu.menuapi.domain.services.establishmentTable.AddEstablishmentTable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class DbAddEstablishmentTable implements AddEstablishmentTable {
 
@@ -21,10 +23,10 @@ public class DbAddEstablishmentTable implements AddEstablishmentTable {
     this.establishmentRepository = establishmentRepository;
   }
   @Override
-  public EstablishmentTable add(EstablishmentTable establishmentTable) {
-    var establishmentId = establishmentTable.getEstablishment().getId();
-    establishmentRepository.findById(establishmentId)
+  public EstablishmentTable add(EstablishmentTable establishmentTable, String establishmentId) {
+    var establishment = establishmentRepository.findById(UUID.fromString(establishmentId))
       .orElseThrow(() -> new EstablishmentNotFoundException(establishmentId.toString()));
+    establishmentTable.setEstablishment(establishment);
     return establishmentTableRepository.save(establishmentTable);
   }
 }
