@@ -1,7 +1,5 @@
 package com.emhk.menu.menuapi.presentation.controllers.order;
 
-import com.emhk.menu.menuapi.domain.models.Establishment;
-import com.emhk.menu.menuapi.domain.models.Order;
 import com.emhk.menu.menuapi.domain.services.order.CreateOrder;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.order.input.OrderInput;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.order.input.disassembler.OrderDisassembler;
@@ -10,8 +8,6 @@ import com.emhk.menu.menuapi.presentation.controllers.dtos.order.output.assemble
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/establishment/{establishmentId}/orders")
