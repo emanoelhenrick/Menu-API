@@ -20,12 +20,6 @@ public class OrderDisassembler {
 	}
 
 	public Order toDomainModel(OrderInput input) {
-		List<ProductIdInput> products = new ArrayList<>();
-		input.getProducts().forEach(product -> {
-			for (int i = 0; i < product.getQuantity(); i++) {
-				products.add(mapper.map(product, ProductIdInput.class));
-			}
-		});
 		return mapper.map(input, Order.class);
 	}
 
