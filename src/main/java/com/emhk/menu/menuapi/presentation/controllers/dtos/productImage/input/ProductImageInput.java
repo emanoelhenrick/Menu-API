@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
-public class productImage {
+public class ProductImageInput {
 
   @FileSize(max = "1MB")
   @FileContentType(contentTypes = { MediaType.IMAGE_PNG_VALUE, MediaType.IMAGE_JPEG_VALUE })
