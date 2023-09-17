@@ -19,4 +19,9 @@ public class ProductRepositoryImpl implements ProductRepositoryQueries {
     return manager.merge(productImage);
   }
 
+  @Transactional
+  public void delete(ProductImage productImage) {
+    manager.remove(productImage);
+  }
+
 }
