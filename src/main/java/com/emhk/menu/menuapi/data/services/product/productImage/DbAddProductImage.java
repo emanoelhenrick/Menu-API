@@ -20,6 +20,12 @@ public class DbAddProductImage implements AddProductImage {
   public ProductImage add(ProductImage productImage, String productId) {
     var product = productRepository.findById(UUID.fromString(productId))
       .orElseThrow(() -> new ProductNotFoundException(productId));
+
+    var establishmentId = product.getEstablishment().getId();
+    var imageOpt = productRepository.findImageById(establishmentId, UUID.fromString(productId));
+
+    imageOpt.ifPresent(productRepository::delete);
+
     productImage.setId(UUID.fromString(productId));
     productImage.setProduct(product);
     return productRepository.saveProductImage(productImage);
