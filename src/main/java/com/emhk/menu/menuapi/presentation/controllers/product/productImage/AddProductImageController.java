@@ -1,5 +1,6 @@
 package com.emhk.menu.menuapi.presentation.controllers.product.productImage;
 
+import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
 import com.emhk.menu.menuapi.domain.services.product.productImage.AddProductImage;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.productImage.input.ProductImageInput;
 import com.emhk.menu.menuapi.presentation.controllers.dtos.productImage.input.disassembler.ProductImageDisassembler;
@@ -30,8 +31,15 @@ public class AddProductImageController {
     @PathVariable String productId,
     @Valid ProductImageInput input
   ) {
-    var imageToSave = disassembler.toDomainModel(input);
-    var savedImage = addProductImage.add(imageToSave, productId);
-    return assembler.toDTO(savedImage);
+    try {
+
+      var inputStream = input.getImage().getInputStream();
+      var imageToSave = disassembler.toDomainModel(input);
+      var savedImage = addProductImage.add(imageToSave, productId, inputStream);
+      return assembler.toDTO(savedImage);
+
+    } catch (Exception ex) {
+      throw new BusinessException(ex.getMessage());
+    }
   }
 }
