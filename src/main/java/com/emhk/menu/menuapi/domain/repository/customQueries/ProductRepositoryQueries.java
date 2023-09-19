@@ -5,6 +5,7 @@ import com.emhk.menu.menuapi.domain.models.ProductImage;
 public interface ProductRepositoryQueries {
 
   ProductImage saveProductImage(ProductImage productImage);
-  void delete(ProductImage productImage);
+
+  void deleteProductImage(ProductImage productImage);
 
 }
