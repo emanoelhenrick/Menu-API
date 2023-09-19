@@ -17,8 +17,10 @@ public class LocalSaveImageToStore implements SaveImageToStorage {
 
   @Override
   public void save(NewImage newImage) throws IOException {
-    Path outputPath = Path.of("/localImages/", newImage.getFilename());
-    FileCopyUtils.copy(newImage.getInputStream(), Files.newOutputStream(outputPath));
+    FileCopyUtils.copy(
+      newImage.getInputStream(),
+      Files.newOutputStream(getFilePath(newImage.getFilename()))
+    );
   }
 
   private Path getFilePath(String filename) {
