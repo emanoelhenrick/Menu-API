@@ -30,7 +30,12 @@ public class DbAddProductImage implements AddProductImage {
     var establishmentId = product.getEstablishment().getId();
     var imageOpt = productRepository.findImageById(establishmentId, UUID.fromString(productId));
 
-    imageOpt.ifPresent(productRepository::deleteProductImage);
+    String oldFilename = null;
+
+    if (imageOpt.isPresent()) {
+      oldFilename = imageOpt.get().getFileName();
+      productRepository.deleteProductImage(productImage);
+    }
 
     productImage.setId(UUID.fromString(productId));
     productImage.setProduct(product);
@@ -44,7 +49,7 @@ public class DbAddProductImage implements AddProductImage {
       .build();
 
     try {
-      saveImageToStorage.save(newImage);
+      saveImageToStorage.replace(oldFilename, newImage);
     } catch (IOException e) {
       throw new BusinessException(e.getMessage());
     }
