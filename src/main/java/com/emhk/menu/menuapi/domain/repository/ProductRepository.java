@@ -10,10 +10,11 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 import java.util.UUID;
 
-
 public interface ProductRepository extends JpaRepository<Product, UUID>, ProductRepositoryQueries {
 
-  @Query("select f from ProductImage f join f.product p" +
-    "where p.restaurant.id = :restaurantId and p.product.id = :productId")
-  Optional<ProductImage> findImageById(UUID restaurantId, UUID productId);
+//  @Query("select i from ProductImage i join i.product p where " +
+//    "p.establishment.id = :establishmentId and p.id = :productId")
+  @Query("from ProductImage where product.establishment.id = :establishmentId and product.id = :productId")
+  Optional<ProductImage> findImageById(UUID establishmentId, UUID productId);
+
 }
