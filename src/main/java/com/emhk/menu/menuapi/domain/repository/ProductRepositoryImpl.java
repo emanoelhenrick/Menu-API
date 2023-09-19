@@ -1,4 +1,4 @@
-package com.emhk.menu.menuapi.infra.repository;
+package com.emhk.menu.menuapi.domain.repository;
 
 import com.emhk.menu.menuapi.domain.models.ProductImage;
 import com.emhk.menu.menuapi.domain.repository.customQueries.ProductRepositoryQueries;
@@ -19,8 +19,9 @@ public class ProductRepositoryImpl implements ProductRepositoryQueries {
     return manager.merge(productImage);
   }
 
+  @Override
   @Transactional
-  public void delete(ProductImage productImage) {
+  public void deleteProductImage(ProductImage productImage) {
     manager.remove(productImage);
   }
 
