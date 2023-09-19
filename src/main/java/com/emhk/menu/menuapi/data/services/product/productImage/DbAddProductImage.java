@@ -34,6 +34,7 @@ public class DbAddProductImage implements AddProductImage {
 
     productImage.setId(UUID.fromString(productId));
     productImage.setProduct(product);
+    productImage.setFileName(saveImageToStorage.generateFilename(productImage.getFileName()));
     var image = productRepository.saveProductImage(productImage);
     productRepository.flush();
 
