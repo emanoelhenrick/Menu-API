@@ -1,5 +1,6 @@
 package com.emhk.menu.menuapi.infra.service.storage;
 
+import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
 import com.emhk.menu.menuapi.domain.services.storage.SaveImageToStorage;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,16 @@ public class LocalSaveImageToStore implements SaveImageToStorage {
       Files.newOutputStream(getFilePath(newImage.getFilename()))
     );
   }
+
+  @Override
+  public void remove(String filename) {
+    try {
+      Files.deleteIfExists(getFilePath(filename));
+    } catch (Exception ex) {
+      throw new BusinessException(ex.getMessage());
+    }
+  }
+
 
   private Path getFilePath(String filename) {
     return outputPath.resolve(Path.of(filename));
