@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -33,8 +34,20 @@ public class LocalSaveImageToStore implements SaveImageToStorage {
     }
   }
 
+  @Override
+  public InputStream getImage(String filename) {
+    try {
+      var fileExists = Files.exists(getFilePath(filename));
+      if (!fileExists) throw new BusinessException("temp file not found");
+      return Files.newInputStream(getFilePath(filename));
+    } catch (Exception ex) {
+      throw  new BusinessException(ex.getMessage());
+    }
+
+  }
 
   private Path getFilePath(String filename) {
     return outputPath.resolve(Path.of(filename));
   }
+
 }
