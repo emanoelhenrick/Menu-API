@@ -1,7 +1,7 @@
 package com.emhk.menu.menuapi.presentation.exception;
 
 import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
-import com.emhk.menu.menuapi.domain.exceptions.EntityNotAvailable;
+import com.emhk.menu.menuapi.domain.exceptions.EntityNotAvailableException;
 import com.emhk.menu.menuapi.domain.exceptions.EntityNotFoundException;
 import com.emhk.menu.menuapi.domain.exceptions.InUseEntityException;
 import org.springframework.core.Ordered;
@@ -30,8 +30,8 @@ public class BusinessExceptionHandler {
 		return makeResponseEntity(ex, body, new HttpHeaders(), status, req);
 	}
 
-	@ExceptionHandler(EntityNotAvailable.class)
-	public ResponseEntity<?> handleEntityNotAvailable(EntityNotAvailable ex, WebRequest req) {
+	@ExceptionHandler(EntityNotAvailableException.class)
+	public ResponseEntity<?> handleEntityNotAvailable(EntityNotAvailableException ex, WebRequest req) {
 		var status = HttpStatus.FORBIDDEN;
 		var detail = ex.getMessage();
 		var problemType = ProblemType.ENTITY_NOT_AVAILABLE;
