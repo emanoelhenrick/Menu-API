@@ -7,6 +7,8 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Repository
 public class ProductRepositoryImpl implements ProductRepositoryQueries {
 
@@ -17,6 +19,11 @@ public class ProductRepositoryImpl implements ProductRepositoryQueries {
   @Transactional
   public ProductImage saveProductImage(ProductImage productImage) {
     return manager.merge(productImage);
+  }
+
+  @Override
+  public ProductImage findProductImage(String productId) {
+    return manager.find(ProductImage.class, UUID.fromString(productId));
   }
 
   @Override
