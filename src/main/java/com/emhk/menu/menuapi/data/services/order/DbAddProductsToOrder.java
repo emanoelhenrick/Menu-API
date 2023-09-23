@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.emhk.menu.menuapi.domain.exceptions.order.OrderNotFoundException;
-import com.emhk.menu.menuapi.domain.exceptions.product.ProductNotAvailable;
+import com.emhk.menu.menuapi.domain.exceptions.product.ProductNotAvailableException;
 import com.emhk.menu.menuapi.domain.exceptions.product.ProductNotFoundException;
 import com.emhk.menu.menuapi.domain.models.ProductOrder;
 import com.emhk.menu.menuapi.domain.repository.ProductRepository;
@@ -42,7 +42,7 @@ public class DbAddProductsToOrder implements AddProductsToOrder {
       var product = productRepository.findById(UUID.fromString(productId))
         .orElseThrow(() -> new ProductNotFoundException(productId));
 
-      if (!product.getActive()) throw new ProductNotAvailable(productId);
+      if (!product.getActive()) throw new ProductNotAvailableException(productId);
 
       productOrder.setUnitPrice(product.getPrice());
       var productTotalPrice = product.getPrice()
