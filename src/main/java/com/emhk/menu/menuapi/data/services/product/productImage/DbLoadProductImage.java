@@ -1,6 +1,7 @@
 package com.emhk.menu.menuapi.data.services.product.productImage;
 
 import com.emhk.menu.menuapi.domain.exceptions.product.ProductNotFoundException;
+import com.emhk.menu.menuapi.domain.exceptions.product.productImage.ProductImageNotFoundException;
 import com.emhk.menu.menuapi.domain.models.ProductImage;
 import com.emhk.menu.menuapi.domain.repository.ProductRepository;
 import com.emhk.menu.menuapi.domain.services.product.productImage.LoadProductImage;
@@ -21,6 +22,7 @@ public class DbLoadProductImage implements LoadProductImage {
   public ProductImage load(String productId) {
     var product = productRepository.findById(UUID.fromString(productId))
       .orElseThrow(() -> new ProductNotFoundException(productId));
-    return productRepository.findProductImage(productId);
+    return productRepository.findProductImage(productId)
+      .orElseThrow(() -> new ProductImageNotFoundException(productId));
   }
 }
