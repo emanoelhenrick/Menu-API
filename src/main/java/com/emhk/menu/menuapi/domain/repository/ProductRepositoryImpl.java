@@ -7,6 +7,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -22,8 +23,8 @@ public class ProductRepositoryImpl implements ProductRepositoryQueries {
   }
 
   @Override
-  public ProductImage findProductImage(String productId) {
-    return manager.find(ProductImage.class, UUID.fromString(productId));
+  public Optional<ProductImage> findProductImage(String productId) {
+    return Optional.ofNullable(manager.find(ProductImage.class, UUID.fromString(productId)));
   }
 
   @Override
