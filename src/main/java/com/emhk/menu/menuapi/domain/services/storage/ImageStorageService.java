@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
 
-public interface SaveImageToStorage {
+public interface ImageStorageService {
 
   void save(NewImage newImage) throws IOException;
   void remove(String filename);

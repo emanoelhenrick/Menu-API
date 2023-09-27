@@ -1,7 +1,7 @@
 package com.emhk.menu.menuapi.infra.service.storage;
 
 import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
-import com.emhk.menu.menuapi.domain.services.storage.SaveImageToStorage;
+import com.emhk.menu.menuapi.domain.services.storage.ImageStorageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 @Service
-public class LocalSaveImageToStore implements SaveImageToStorage {
+public class LocalImageStoreService implements ImageStorageService {
 
   @Value("${menu.storage.local.image-dir}")
   private Path outputPath;
