@@ -25,4 +25,5 @@ public class DbLoadProductImage implements LoadProductImage {
     return productRepository.findProductImage(productId)
       .orElseThrow(() -> new ProductImageNotFoundException(productId));
   }
+
 }

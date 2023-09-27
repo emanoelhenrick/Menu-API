@@ -5,7 +5,7 @@ import com.emhk.menu.menuapi.domain.exceptions.product.ProductNotFoundException;
 import com.emhk.menu.menuapi.domain.models.ProductImage;
 import com.emhk.menu.menuapi.domain.repository.ProductRepository;
 import com.emhk.menu.menuapi.domain.services.product.productImage.AddProductImage;
-import com.emhk.menu.menuapi.domain.services.storage.SaveImageToStorage;
+import com.emhk.menu.menuapi.domain.services.storage.ImageStorageService;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,11 +16,11 @@ import java.util.UUID;
 public class DbAddProductImage implements AddProductImage {
 
   private final ProductRepository productRepository;
-  private final SaveImageToStorage saveImageToStorage;
+  private final ImageStorageService imageStorageService;
 
-  DbAddProductImage(ProductRepository productRepository, SaveImageToStorage saveImageToStorage) {
+  DbAddProductImage(ProductRepository productRepository, ImageStorageService imageStorageService) {
     this.productRepository = productRepository;
-    this.saveImageToStorage = saveImageToStorage;
+    this.imageStorageService = imageStorageService;
   }
 
   public ProductImage add(ProductImage productImage, String productId, InputStream inputStream) {
@@ -39,17 +39,17 @@ public class DbAddProductImage implements AddProductImage {
 
     productImage.setId(UUID.fromString(productId));
     productImage.setProduct(product);
-    productImage.setFileName(saveImageToStorage.generateFilename(productImage.getFileName()));
+    productImage.setFileName(imageStorageService.generateFilename(productImage.getFileName()));
     var image = productRepository.saveProductImage(productImage);
     productRepository.flush();
 
-    var newImage = SaveImageToStorage.NewImage.builder()
+    var newImage = ImageStorageService.NewImage.builder()
       .filename(image.getFileName())
       .inputStream(inputStream)
       .build();
 
     try {
-      saveImageToStorage.replace(oldFilename, newImage);
+      imageStorageService.replace(oldFilename, newImage);
     } catch (IOException e) {
       throw new BusinessException(e.getMessage());
     }
