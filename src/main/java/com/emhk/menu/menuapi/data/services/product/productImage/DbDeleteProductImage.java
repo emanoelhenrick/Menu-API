@@ -4,8 +4,10 @@ import com.emhk.menu.menuapi.domain.exceptions.product.productImage.ProductImage
 import com.emhk.menu.menuapi.domain.repository.ProductRepository;
 import com.emhk.menu.menuapi.domain.services.product.productImage.DeleteProductImage;
 import com.emhk.menu.menuapi.domain.services.storage.ImageStorageService;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 public class DbDeleteProductImage implements DeleteProductImage {
 
   private final ImageStorageService imageStorageService;
