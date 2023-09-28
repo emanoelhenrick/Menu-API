@@ -1,5 +1,6 @@
 package com.emhk.menu.menuapi.presentation.controllers.product.productImage;
 
+import com.emhk.menu.menuapi.domain.exceptions.BusinessException;
 import com.emhk.menu.menuapi.domain.exceptions.EntityNotFoundException;
 import com.emhk.menu.menuapi.domain.services.product.productImage.LoadProductImage;
 import com.emhk.menu.menuapi.domain.services.storage.ImageStorageService;
@@ -9,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/products/{productId}/image")
@@ -33,16 +34,32 @@ public class LoadProductImageController {
     return assembler.toDTO(productImage);
   }
 
-  @GetMapping(produces = MediaType.IMAGE_JPEG_VALUE)
-  public ResponseEntity<InputStreamResource> serveProductImage(@PathVariable String productId) {
+  @GetMapping
+  public ResponseEntity<InputStreamResource> serveProductImage(
+    @PathVariable String productId,
+    @RequestHeader(name = "accept") String acceptHeader
+  ) throws HttpMediaTypeNotAcceptableException {
     try {
       var productImage = loadProductImage.load(productId);
       var imageStream = imageStorageService.getImage(productImage.getFileName());
+      var mediaTypes = MediaType.parseMediaTypes(acceptHeader);
+      var imageMediaType = MediaType.parseMediaType(productImage.getContentType());
+      verifyMediaType(imageMediaType, mediaTypes);
+
       return ResponseEntity.ok()
         .contentType(MediaType.APPLICATION_JSON)
         .body(new InputStreamResource(imageStream));
     } catch (EntityNotFoundException ex) {
       return ResponseEntity.notFound().build();
+    }
+  }
+
+  private void verifyMediaType(MediaType imageMediaType, List<MediaType> allowedMediaTypes)
+    throws HttpMediaTypeNotAcceptableException {
+    boolean isAllowed = allowedMediaTypes.stream()
+      .anyMatch(mediaType -> mediaType.isCompatibleWith(imageMediaType));
+    if (!isAllowed) {
+      throw new HttpMediaTypeNotAcceptableException(allowedMediaTypes);
     }
   }
 
