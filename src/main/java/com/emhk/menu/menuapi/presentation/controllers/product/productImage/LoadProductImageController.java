@@ -47,7 +47,7 @@ public class LoadProductImageController {
       verifyMediaType(imageMediaType, mediaTypes);
 
       return ResponseEntity.ok()
-        .contentType(MediaType.APPLICATION_JSON)
+        .contentType(imageMediaType)
         .body(new InputStreamResource(imageStream));
     } catch (EntityNotFoundException ex) {
       return ResponseEntity.notFound().build();
